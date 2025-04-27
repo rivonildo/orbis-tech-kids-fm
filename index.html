@@ -21,6 +21,12 @@
         }
         .player {
             margin-top: 20px;
+            display: none; /* O player estará escondido inicialmente */
+        }
+        .player iframe {
+            width: 100%;
+            height: 150px;
+            border: none;
         }
         .player a {
             display: inline-block;
@@ -47,8 +53,14 @@
     <h1>📻 Orbis Tech Kids FM</h1>
     <p>Conectando sonhos de Xique-Xique ao mundo da tecnologia!</p>
 
+    <!-- Botão para ativar o player -->
     <div class="player">
-        <a href="https://zeno.fm/radio/orbis-tech-kids-fm/" target="_blank">🎶 Ouça a Rádio</a>
+        <a href="javascript:void(0);" onclick="tocarRadio()">🎶 Ouça a Rádio</a>
+    </div>
+
+    <!-- Player embutido (iframe) que será exibido após o clique -->
+    <div id="radio-container" class="player">
+        <iframe src="https://zeno.fm/radio/orbis-tech-kids-fm/widget/player/" allow="autoplay"></iframe>
     </div>
 
     <p>💚 Uma iniciativa que leva conhecimento, esperança e oportunidades às crianças ribeirinhas e sertanejas de Xique-Xique, Bahia.</p>
@@ -57,6 +69,14 @@
         Projeto idealizado por Rivonildo Azevedo – Construindo um futuro para nossa gente!<br>
         © 2025 Orbis Tech Kids FM
     </footer>
+
+    <script>
+        // Função que exibe o player quando o botão é clicado
+        function tocarRadio() {
+            document.getElementById("radio-container").style.display = "block"; // Mostra o player
+            document.querySelector(".player a").style.display = "none"; // Esconde o botão
+        }
+    </script>
 
 </body>
 </html>
