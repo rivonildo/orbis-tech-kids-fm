@@ -22,7 +22,7 @@
     .player {
       margin-top: 20px;
     }
-    .player button {
+    button {
       padding: 12px 25px;
       background-color: #0077b6;
       color: #fff;
@@ -32,17 +32,16 @@
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
-    .player button:hover {
+    button:hover {
       background-color: #005f8a;
-    }
-    #audio-player {
-      margin-top: 20px;
-      display: none;
     }
     footer {
       margin-top: 40px;
       font-size: 14px;
       color: #666;
+    }
+    #audio-player {
+      display: none;
     }
   </style>
 </head>
@@ -51,17 +50,9 @@
   <h1>📻 Orbis Tech Kids FM</h1>
   <p>Conectando sonhos de Xique-Xique ao mundo da tecnologia!</p>
 
-  <!-- Botão para tocar a rádio -->
   <div class="player">
     <button onclick="playRadio()">🎶 Ouça a Rádio</button>
-  </div>
-
-  <!-- Áudio player oculto inicialmente -->
-  <div id="audio-player">
-    <audio id="radio" controls autoplay>
-      <source src="https://stream.zeno.fm/fv7et6tmk0hvv" type="audio/mpeg">
-      Seu navegador não suporta o elemento de áudio.
-    </audio>
+    <audio id="audio-player" src="https://stream.zeno.fm/vq45x8d8u5zuv" preload="none"></audio>
   </div>
 
   <p>💚 Uma iniciativa que leva conhecimento, esperança e oportunidades às crianças ribeirinhas e sertanejas de Xique-Xique, Bahia.</p>
@@ -73,9 +64,12 @@
 
   <script>
     function playRadio() {
-      document.getElementById('audio-player').style.display = 'block';
-      document.getElementById('radio').play();
-      document.querySelector('.player').style.display = 'none';
+      var audio = document.getElementById('audio-player');
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
     }
   </script>
 
