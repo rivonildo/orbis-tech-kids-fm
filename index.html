@@ -6,33 +6,72 @@
     <title>Orbis Tech Kids FM</title>
     <style>
         body {
-            background-color: #e6f7ff;
+            background: linear-gradient(to right, #0077b6, #ffffff, #ff4d4d);
             font-family: Arial, sans-serif;
             text-align: center;
             padding: 20px;
+            color: #000;
         }
         h1 {
-            color: #0077b6;
+            color: #ffffff;
+            margin-bottom: 10px;
         }
         p {
             font-size: 18px;
-            color: #333;
             margin-top: 10px;
+            color: #000;
         }
         .player {
-            margin-top: 20px;
+            margin: 20px 0;
         }
         audio {
-            margin-top: 20px;
+            margin-top: 10px;
             width: 100%;
             max-width: 400px;
             border-radius: 10px;
             outline: none;
         }
+        .section {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        input, button {
+            padding: 10px;
+            margin: 8px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #0077b6;
+        }
+        button {
+            background-color: #0077b6;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #005f8a;
+        }
+        .whatsapp-button {
+            background-color: #25d366;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 18px;
+            display: inline-block;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        .whatsapp-button:hover {
+            background-color: #1ebe5b;
+        }
         footer {
             margin-top: 40px;
             font-size: 14px;
-            color: #666;
+            color: #ffffff;
         }
     </style>
 </head>
@@ -51,10 +90,86 @@
 
     <p>💚 Uma iniciativa que leva conhecimento, esperança e oportunidades às crianças ribeirinhas e sertanejas de Xique-Xique, Bahia.</p>
 
+    <!-- Seção de Suporte Especializado -->
+    <div class="section">
+        <h2>🔧 SUPORTE ESPECIALIZADO, PROBLEMA RESOLVIDO! 🚀</h2>
+        <p>Seu canal sumiu? O app travou? 📡<br>
+        Fique tranquilo! Trabalhamos com todos os sistemas e sempre encontramos a solução!<br><br>
+        💬 Atendimento rápido e eficiente! Seu entretenimento SEM preocupações!</p>
+        <p>👇📲 Me chama no WhatsApp!👇</p>
+        <a class="whatsapp-button" href="https://wa.me/5574999140925" target="_blank">Falar no WhatsApp</a>
+        <p>#SuportePremium #ProblemaResolvido #TVOnline</p>
+    </div>
+
+    <!-- Seção de Calculadora de IMC -->
+    <div class="section">
+        <h2>🧮 Calculadora de IMC</h2>
+        <input type="number" id="peso" placeholder="Peso (kg)" step="0.1">
+        <input type="number" id="altura" placeholder="Altura (m)" step="0.01">
+        <button onclick="calcularIMC()">Calcular IMC</button>
+        <p id="resultadoIMC"></p>
+    </div>
+
+    <!-- Seção de Verificador de Signo -->
+    <div class="section">
+        <h2>🔮 Descubra seu Signo</h2>
+        <input type="date" id="dataNascimento">
+        <button onclick="verificarSigno()">Ver Meu Signo</button>
+        <p id="resultadoSigno"></p>
+    </div>
+
     <footer>
         Projeto idealizado por Rivonildo Azevedo – Construindo um futuro para nossa gente!<br>
         © 2025 Orbis Tech Kids FM
     </footer>
+
+    <script>
+        function calcularIMC() {
+            const peso = parseFloat(document.getElementById('peso').value);
+            const altura = parseFloat(document.getElementById('altura').value);
+            if (!peso || !altura) {
+                document.getElementById('resultadoIMC').innerText = "Por favor, preencha peso e altura.";
+                return;
+            }
+            const imc = peso / (altura * altura);
+            let classificacao = '';
+            if (imc < 18.5) classificacao = 'Abaixo do peso';
+            else if (imc < 24.9) classificacao = 'Peso normal';
+            else if (imc < 29.9) classificacao = 'Sobrepeso';
+            else if (imc < 34.9) classificacao = 'Obesidade grau 1';
+            else if (imc < 39.9) classificacao = 'Obesidade grau 2';
+            else classificacao = 'Obesidade grau 3 (mórbida)';
+            
+            document.getElementById('resultadoIMC').innerText = `Seu IMC é ${imc.toFixed(2)} - ${classificacao}`;
+        }
+
+        function verificarSigno() {
+            const data = new Date(document.getElementById('dataNascimento').value);
+            if (!data.getDate()) {
+                document.getElementById('resultadoSigno').innerText = "Por favor, selecione uma data.";
+                return;
+            }
+            const dia = data.getDate();
+            const mes = data.getMonth() + 1;
+
+            let signo = '';
+
+            if ((mes == 1 && dia >= 20) || (mes == 2 && dia <= 18)) signo = "Aquário";
+            else if ((mes == 2 && dia >= 19) || (mes == 3 && dia <= 20)) signo = "Peixes";
+            else if ((mes == 3 && dia >= 21) || (mes == 4 && dia <= 19)) signo = "Áries";
+            else if ((mes == 4 && dia >= 20) || (mes == 5 && dia <= 20)) signo = "Touro";
+            else if ((mes == 5 && dia >= 21) || (mes == 6 && dia <= 20)) signo = "Gêmeos";
+            else if ((mes == 6 && dia >= 21) || (mes == 7 && dia <= 22)) signo = "Câncer";
+            else if ((mes == 7 && dia >= 23) || (mes == 8 && dia <= 22)) signo = "Leão";
+            else if ((mes == 8 && dia >= 23) || (mes == 9 && dia <= 22)) signo = "Virgem";
+            else if ((mes == 9 && dia >= 23) || (mes == 10 && dia <= 22)) signo = "Libra";
+            else if ((mes == 10 && dia >= 23) || (mes == 11 && dia <= 21)) signo = "Escorpião";
+            else if ((mes == 11 && dia >= 22) || (mes == 12 && dia <= 21)) signo = "Sagitário";
+            else signo = "Capricórnio";
+
+            document.getElementById('resultadoSigno').innerText = `Seu signo é: ${signo}`;
+        }
+    </script>
 
 </body>
 </html>
