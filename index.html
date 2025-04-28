@@ -22,18 +22,12 @@
         .player {
             margin-top: 20px;
         }
-        .player a {
-            display: inline-block;
-            padding: 12px 25px;
-            background-color: #0077b6;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 18px;
-            transition: background-color 0.3s ease;
-        }
-        .player a:hover {
-            background-color: #005f8a;
+        audio {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+            outline: none;
         }
         footer {
             margin-top: 40px;
@@ -48,7 +42,11 @@
     <p>Conectando sonhos de Xique-Xique ao mundo da tecnologia!</p>
 
     <div class="player">
-        <a href="https://zeno.fm/radio/orbis-tech-kids-fm/" target="_blank">🎶 Ouça a Rádio</a>
+        <!-- Player embutido -->
+        <audio controls autoplay>
+            <source src="https://stream.zeno.fm/blwmni8z8prvv" type="audio/mpeg">
+            Seu navegador não suporta o elemento de áudio HTML5.
+        </audio>
     </div>
 
     <p>💚 Uma iniciativa que leva conhecimento, esperança e oportunidades às crianças ribeirinhas e sertanejas de Xique-Xique, Bahia.</p>
