@@ -21,12 +21,7 @@
         }
         .player {
             margin-top: 20px;
-            display: none; /* O player estará escondido inicialmente */
-        }
-        .player iframe {
-            width: 100%;
-            height: 150px;
-            border: none;
+            display: block; /* Garante que o botão será exibido inicialmente */
         }
         .player a {
             display: inline-block;
@@ -40,6 +35,15 @@
         }
         .player a:hover {
             background-color: #005f8a;
+        }
+        #radio-container {
+            margin-top: 20px;
+            display: none; /* O player estará escondido inicialmente */
+        }
+        iframe {
+            width: 100%;
+            height: 150px;
+            border: none;
         }
         footer {
             margin-top: 40px;
@@ -59,7 +63,7 @@
     </div>
 
     <!-- Player embutido (iframe) que será exibido após o clique -->
-    <div id="radio-container" class="player">
+    <div id="radio-container">
         <iframe src="https://zeno.fm/radio/orbis-tech-kids-fm/widget/player/" allow="autoplay"></iframe>
     </div>
 
@@ -74,7 +78,7 @@
         // Função que exibe o player quando o botão é clicado
         function tocarRadio() {
             document.getElementById("radio-container").style.display = "block"; // Mostra o player
-            document.querySelector(".player a").style.display = "none"; // Esconde o botão
+            document.querySelector(".player").style.display = "none"; // Esconde o botão
         }
     </script>
 
