@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orbis Tech Kids FM</title>
 
-    <!-- Manifesto e Icone -->
+    <!-- Manifesto e Ícone -->
     <link rel="manifest" href="manifest.json">
     <link rel="icon" href="icon-192.png" type="image/png">
     <meta name="theme-color" content="#0077b6">
@@ -130,6 +130,17 @@
         <p id="resultadoSigno"></p>
     </div>
 
+    <div class="section">
+        <h2>🎙️ Acessibilidade: Ouça esta página</h2>
+        <button onclick="lerPagina()">🔊 Ler Tudo</button>
+    </div>
+
+    <div class="section">
+        <h2>👤 Gostaria de saber mais sobre o desenvolvedor?</h2>
+        <p>Clique no botão abaixo e conheça a história por trás desta iniciativa incrível!</p>
+        <a class="whatsapp-button" href="biografia.html" style="background-color: #0077b6;">Ver Biografia</a>
+    </div>
+
     <footer>
         Projeto idealizado por Rivonildo Azevedo – Construindo um futuro para nossa gente!<br>
         © 2025 Orbis Tech Kids FM
@@ -215,6 +226,15 @@
             else signo = "Capricórnio";
 
             document.getElementById('resultadoSigno').innerText = `Seu signo é: ${signo}`;
+        }
+
+        function lerPagina() {
+            const texto = document.body.innerText;
+            const fala = new SpeechSynthesisUtterance(texto);
+            fala.lang = 'pt-BR';
+            fala.rate = 1;
+            fala.pitch = 1;
+            window.speechSynthesis.speak(fala);
         }
     </script>
 
