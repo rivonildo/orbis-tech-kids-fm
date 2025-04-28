@@ -1,77 +1,62 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Orbis Tech Kids FM</title>
-  <style>
-    body {
-      background-color: #e6f7ff;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 20px;
-    }
-    h1 {
-      color: #0077b6;
-    }
-    p {
-      font-size: 18px;
-      color: #333;
-      margin-top: 10px;
-    }
-    .player {
-      margin-top: 20px;
-    }
-    button {
-      padding: 12px 25px;
-      background-color: #0077b6;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      font-size: 18px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    button:hover {
-      background-color: #005f8a;
-    }
-    footer {
-      margin-top: 40px;
-      font-size: 14px;
-      color: #666;
-    }
-    #audio-player {
-      display: none;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orbis Tech Kids FM</title>
+    <style>
+        body {
+            background-color: #e6f7ff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #0077b6;
+        }
+        p {
+            font-size: 18px;
+            color: #333;
+            margin-top: 10px;
+        }
+        .player {
+            margin-top: 20px;
+        }
+        .player a {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #0077b6;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+        .player a:hover {
+            background-color: #005f8a;
+        }
+        footer {
+            margin-top: 40px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
 </head>
 <body>
 
-  <h1>📻 Orbis Tech Kids FM</h1>
-  <p>Conectando sonhos de Xique-Xique ao mundo da tecnologia!</p>
+    <h1>📻 Orbis Tech Kids FM</h1>
+    <p>Conectando sonhos de Xique-Xique ao mundo da tecnologia!</p>
 
-  <div class="player">
-    <button onclick="playRadio()">🎶 Ouça a Rádio</button>
-    <audio id="audio-player" src="https://stream.zeno.fm/vq45x8d8u5zuv" preload="none"></audio>
-  </div>
+    <div class="player">
+        <a href="https://zeno.fm/radio/orbis-tech-kids-fm/" target="_blank">🎶 Ouça a Rádio</a>
+    </div>
 
-  <p>💚 Uma iniciativa que leva conhecimento, esperança e oportunidades às crianças ribeirinhas e sertanejas de Xique-Xique, Bahia.</p>
+    <p>💚 Uma iniciativa que leva conhecimento, esperança e oportunidades às crianças ribeirinhas e sertanejas de Xique-Xique, Bahia.</p>
 
-  <footer>
-    Projeto idealizado por Rivonildo Azevedo – Construindo um futuro para nossa gente!<br>
-    © 2025 Orbis Tech Kids FM
-  </footer>
-
-  <script>
-    function playRadio() {
-      var audio = document.getElementById('audio-player');
-      if (audio.paused) {
-        audio.play();
-      } else {
-        audio.pause();
-      }
-    }
-  </script>
+    <footer>
+        Projeto idealizado por Rivonildo Azevedo – Construindo um futuro para nossa gente!<br>
+        © 2025 Orbis Tech Kids FM
+    </footer>
 
 </body>
 </html>
