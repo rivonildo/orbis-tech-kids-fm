@@ -221,57 +221,52 @@
         cor = '#ff4500';
       } else if (imc < 39.9) {
         classificacao = 'Obesidade grau 2';
-        mensagem = '⚠️ Atenção: Obesidade moderada. Busque ajuda médica.';
-        cor = '#dc143c';
+        mensagem = '⚠️ Atenção: Obesidade moderada. Procure ajuda profissional.';
+        cor = '#ff0000';
       } else {
         classificacao = 'Obesidade grau 3 (mórbida)';
-        mensagem = '🚨 Alto risco: Procure ajuda médica urgente.';
-        cor = '#8b0000';
+        mensagem = '🚨 Urgente: Obesidade grave. Busque orientação médica imediatamente.';
+        cor = '#dc143c';
       }
 
-      document.getElementById('resultadoIMC').innerHTML = `
-        Seu IMC é <strong>${imc.toFixed(2)}</strong> - <strong>${classificacao}</strong><br><br>
-        ${mensagem}
-      `;
+      document.getElementById('resultadoIMC').innerText = `Seu IMC é ${imc.toFixed(2)} - ${classificacao}. ${mensagem}`;
       document.getElementById('resultadoIMC').style.color = cor;
     }
 
     function verificarSigno() {
-      const data = new Date(document.getElementById('dataNascimento').value);
-      if (!data.getDate()) {
-        document.getElementById('resultadoSigno').innerText = "Por favor, selecione uma data.";
+      const dataNascimento = document.getElementById('dataNascimento').value;
+      if (!dataNascimento) {
+        document.getElementById('resultadoSigno').innerText = 'Por favor, insira sua data de nascimento.';
         return;
       }
-      const dia = data.getDate();
+      const data = new Date(dataNascimento);
       const mes = data.getMonth() + 1;
       let signo = '';
 
-      if ((mes == 1 && dia >= 20) || (mes == 2 && dia <= 18)) signo = "Aquário";
-      else if ((mes == 2 && dia >= 19) || (mes == 3 && dia <= 20)) signo = "Peixes";
-      else if ((mes == 3 && dia >= 21) || (mes == 4 && dia <= 19)) signo = "Áries";
-      else if ((mes == 4 && dia >= 20) || (mes == 5 && dia <= 20)) signo = "Touro";
-      else if ((mes == 5 && dia >= 21) || (mes == 6 && dia <= 20)) signo = "Gêmeos";
-      else if ((mes == 6 && dia >= 21) || (mes == 7 && dia <= 22)) signo = "Câncer";
-      else if ((mes == 7 && dia >= 23) || (mes == 8 && dia <= 22)) signo = "Leão";
-      else if ((mes == 8 && dia >= 23) || (mes == 9 && dia <= 22)) signo = "Virgem";
-      else if ((mes == 9 && dia >= 23) || (mes == 10 && dia <= 22)) signo = "Libra";
-      else if ((mes == 10 && dia >= 23) || (mes == 11 && dia <= 21)) signo = "Escorpião";
-      else if ((mes == 11 && dia >= 22) || (mes == 12 && dia <= 21)) signo = "Sagitário";
-      else signo = "Capricórnio";
+      switch (mes) {
+        case 1: signo = "Capricórnio"; break;
+        case 2: signo = "Aquário"; break;
+        case 3: signo = "Peixes"; break;
+        case 4: signo = "Áries"; break;
+        case 5: signo = "Touro"; break;
+        case 6: signo = "Gêmeos"; break;
+        case 7: signo = "Câncer"; break;
+        case 8: signo = "Leão"; break;
+        case 9: signo = "Virgem"; break;
+        case 10: signo = "Libra"; break;
+        case 11: signo = "Escorpião"; break;
+        case 12: signo = "Sagitário"; break;
+      }
 
-      document.getElementById('resultadoSigno').innerText = `Seu signo é: ${signo}`;
+      document.getElementById('resultadoSigno').innerText = `Seu signo é ${signo}!`;
     }
 
     function lerPagina() {
-      let texto = document.body.innerText;
-      texto = texto.replace(/([\u2700-\u27BF]|[\uE000-\uF8FF]|[\uD83C-\uDBFF\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83D[\uDC00-\uDE4F])/g, '');
-      const fala = new SpeechSynthesisUtterance(texto);
-      fala.lang = 'pt-BR';
-      fala.rate = 1;
-      fala.pitch = 1;
-      window.speechSynthesis.speak(fala);
+      const texto = document.body.innerText;
+      const msg = new SpeechSynthesisUtterance(texto);
+      window.speechSynthesis.speak(msg);
     }
   </script>
-
+  
 </body>
 </html>
