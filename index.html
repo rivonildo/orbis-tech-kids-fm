@@ -229,7 +229,11 @@
         }
 
         function lerPagina() {
-            const texto = document.body.innerText;
+            let texto = document.body.innerText;
+
+            // Remove emojis antes de narrar
+            texto = texto.replace(/([\u2700-\u27BF]|[\uE000-\uF8FF]|[\uD83C-\uDBFF\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83D[\uDC00-\uDE4F])/g, '');
+
             const fala = new SpeechSynthesisUtterance(texto);
             fala.lang = 'pt-BR';
             fala.rate = 1;
@@ -240,3 +244,4 @@
 
 </body>
 </html>
+
