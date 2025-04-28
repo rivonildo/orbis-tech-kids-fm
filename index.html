@@ -1,86 +1,83 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orbis Tech Kids FM</title>
-    <style>
-        body {
-            background-color: #e6f7ff;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
-        }
-        h1 {
-            color: #0077b6;
-        }
-        p {
-            font-size: 18px;
-            color: #333;
-            margin-top: 10px;
-        }
-        .player {
-            margin-top: 20px;
-            display: block; /* Garante que o botão será exibido inicialmente */
-        }
-        .player a {
-            display: inline-block;
-            padding: 12px 25px;
-            background-color: #0077b6;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 18px;
-            transition: background-color 0.3s ease;
-        }
-        .player a:hover {
-            background-color: #005f8a;
-        }
-        #radio-container {
-            margin-top: 20px;
-            display: none; /* O player estará escondido inicialmente */
-        }
-        iframe {
-            width: 100%;
-            height: 150px;
-            border: none;
-        }
-        footer {
-            margin-top: 40px;
-            font-size: 14px;
-            color: #666;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orbis Tech Kids FM</title>
+  <style>
+    body {
+      background-color: #e6f7ff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      color: #0077b6;
+    }
+    p {
+      font-size: 18px;
+      color: #333;
+      margin-top: 10px;
+    }
+    .player {
+      margin-top: 20px;
+    }
+    .player button {
+      padding: 12px 25px;
+      background-color: #0077b6;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .player button:hover {
+      background-color: #005f8a;
+    }
+    #audio-player {
+      margin-top: 20px;
+      display: none;
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 14px;
+      color: #666;
+    }
+  </style>
 </head>
 <body>
 
-    <h1>📻 Orbis Tech Kids FM</h1>
-    <p>Conectando sonhos de Xique-Xique ao mundo da tecnologia!</p>
+  <h1>📻 Orbis Tech Kids FM</h1>
+  <p>Conectando sonhos de Xique-Xique ao mundo da tecnologia!</p>
 
-    <!-- Botão para ativar o player -->
-    <div class="player">
-        <a href="javascript:void(0);" onclick="tocarRadio()">🎶 Ouça a Rádio</a>
-    </div>
+  <!-- Botão para tocar a rádio -->
+  <div class="player">
+    <button onclick="playRadio()">🎶 Ouça a Rádio</button>
+  </div>
 
-    <!-- Player embutido (iframe) que será exibido após o clique -->
-    <div id="radio-container">
-        <iframe src="https://zeno.fm/radio/orbis-tech-kids-fm/widget/player/" allow="autoplay"></iframe>
-    </div>
+  <!-- Áudio player oculto inicialmente -->
+  <div id="audio-player">
+    <audio id="radio" controls autoplay>
+      <source src="https://stream.zeno.fm/fv7et6tmk0hvv" type="audio/mpeg">
+      Seu navegador não suporta o elemento de áudio.
+    </audio>
+  </div>
 
-    <p>💚 Uma iniciativa que leva conhecimento, esperança e oportunidades às crianças ribeirinhas e sertanejas de Xique-Xique, Bahia.</p>
+  <p>💚 Uma iniciativa que leva conhecimento, esperança e oportunidades às crianças ribeirinhas e sertanejas de Xique-Xique, Bahia.</p>
 
-    <footer>
-        Projeto idealizado por Rivonildo Azevedo – Construindo um futuro para nossa gente!<br>
-        © 2025 Orbis Tech Kids FM
-    </footer>
+  <footer>
+    Projeto idealizado por Rivonildo Azevedo – Construindo um futuro para nossa gente!<br>
+    © 2025 Orbis Tech Kids FM
+  </footer>
 
-    <script>
-        // Função que exibe o player quando o botão é clicado
-        function tocarRadio() {
-            document.getElementById("radio-container").style.display = "block"; // Mostra o player
-            document.querySelector(".player").style.display = "none"; // Esconde o botão
-        }
-    </script>
+  <script>
+    function playRadio() {
+      document.getElementById('audio-player').style.display = 'block';
+      document.getElementById('radio').play();
+      document.querySelector('.player').style.display = 'none';
+    }
+  </script>
 
 </body>
 </html>
