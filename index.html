@@ -118,7 +118,7 @@
     <div class="modal-content">
       <span class="close" onclick="fecharModalDoacao()">&times;</span>
       <h2>Ajude o Projeto Orbis Tech Kids</h2>
-      <p>Este projeto não é apenas meu, mas pertence a todas as crianças que talvez nunca tiveram uma oportunidade como essa. 
+      <p>Este projeto não é apenas meu, mas pertence a todas as crianças que talvez nunca tiveram uma oportunidade como essa.
       Com sua ajuda, poderemos manter a rádio funcionando, evoluir o projeto e alcançar mais jovens com conhecimento, cultura e alegria.</p>
       <p><strong>Chave Pix:</strong> rivonildo</p>
     </div>
@@ -154,12 +154,13 @@
     }
 
     function verificarSigno() {
-      const data = new Date(document.getElementById('dataNascimento').value);
-      if (isNaN(data)) {
+      const dataInput = document.getElementById('dataNascimento').value;
+      if (!dataInput) {
         document.getElementById('resultadoSigno').innerText = "Data inválida.";
         return;
       }
 
+      const data = new Date(dataInput);
       const dia = data.getDate();
       const mes = data.getMonth() + 1;
 
@@ -182,9 +183,11 @@
 
     function lerPagina() {
       const texto = document.body.innerText;
-      const speech = new SpeechSynthesisUtterance(texto);
-      speech.lang = 'pt-BR';
-      window.speechSynthesis.speak(speech);
+      const fala = new SpeechSynthesisUtterance(texto);
+      fala.lang = 'pt-BR';
+      fala.rate = 1;
+      fala.pitch = 1;
+      window.speechSynthesis.speak(fala);
     }
 
     function abrirModalDoacao() {
