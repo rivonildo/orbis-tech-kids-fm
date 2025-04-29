@@ -4,52 +4,65 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Orbis Tech Kids FM</title>
-
-  <!-- Manifesto e Ícone -->
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="icon-192.png" type="image/png">
   <meta name="theme-color" content="#0077b6">
 
-  <!-- Service Worker -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js')
-        .then(() => console.log('Service Worker registrado com sucesso!'))
-        .catch(error => console.log('Falha no registro do Service Worker:', error));
-    }
-  </script>
-
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to right, #0077b6, #ffffff, #ff4d4d);
-      color: #000;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
+      background-color: #f0f8ff;
+      color: #333;
+    }
+    header {
       text-align: center;
-      padding: 20px;
+      margin-bottom: 30px;
     }
-    h1 { color: #fff; }
-    .section {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 12px;
-      padding: 20px;
-      margin: 20px auto;
+    h1 {
+      color: #0077b6;
+    }
+    .container {
       max-width: 800px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      margin: 0 auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
-    input, button {
-      padding: 10px;
-      margin: 8px;
-      font-size: 16px;
-      border-radius: 8px;
-      border: 1px solid #0077b6;
+    section {
+      margin-bottom: 30px;
+      padding: 20px;
+      border-bottom: 1px solid #eee;
     }
     button {
       background-color: #0077b6;
       color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
       cursor: pointer;
+      font-size: 16px;
+      margin: 5px 0;
     }
     button:hover {
-      background-color: #005f8a;
+      background-color: #005f92;
+    }
+    input, select {
+      padding: 8px;
+      margin: 5px 0;
+      width: 100%;
+      box-sizing: border-box;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    .resultado {
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #e9f7fe;
+      border-radius: 5px;
     }
     .modal {
       display: none;
@@ -60,71 +73,100 @@
       width: 100%;
       height: 100%;
       overflow: auto;
-      background-color: rgba(0, 0, 0, 0.5);
+      background-color: rgba(0,0,0,0.4);
     }
     .modal-content {
-      background-color: #fff;
-      margin: 10% auto;
+      background-color: #fefefe;
+      margin: 15% auto;
       padding: 20px;
       border: 1px solid #888;
+      width: 80%;
+      max-width: 600px;
       border-radius: 10px;
-      width: 90%;
-      max-width: 500px;
-      text-align: left;
     }
     .close {
       color: #aaa;
       float: right;
       font-size: 28px;
       font-weight: bold;
-    }
-    .close:hover, .close:focus {
-      color: black;
-      text-decoration: none;
       cursor: pointer;
+    }
+    .close:hover {
+      color: black;
+    }
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 14px;
+      color: #666;
     }
   </style>
 </head>
 <body>
-  <h1>📻 Orbis Tech Kids FM</h1>
-  <p>Conectando sonhos de Xique-Xique ao mundo da tecnologia!</p>
+  <div class="container">
+    <header>
+      <h1>Orbis Tech Kids FM</h1>
+      <p>Educação digital e tecnológica para crianças e jovens</p>
+    </header>
 
-  <div class="section">
-    <h2>🧮 Calculadora de IMC</h2>
-    <input type="text" id="peso" placeholder="Peso (kg)">
-    <input type="text" id="altura" placeholder="Altura (cm)">
-    <button onclick="calcularIMC()">Calcular IMC</button>
-    <p id="resultadoIMC"></p>
+    <section>
+      <h2>Calculadora de IMC</h2>
+      <label for="peso">Peso (kg):</label>
+      <input type="text" id="peso" placeholder="Ex: 68.5">
+      <label for="altura">Altura (cm):</label>
+      <input type="text" id="altura" placeholder="Ex: 175">
+      <button onclick="calcularIMC()">Calcular IMC</button>
+      <div id="resultadoIMC" class="resultado"></div>
+    </section>
+
+    <section>
+      <h2>Descubra seu Signo</h2>
+      <label for="dataNascimento">Data de Nascimento:</label>
+      <input type="date" id="dataNascimento">
+      <button onclick="verificarSigno()">Descobrir Signo</button>
+      <div id="resultadoSigno" class="resultado"></div>
+    </section>
+
+    <section>
+      <h2>Acessibilidade</h2>
+      <button onclick="lerPagina()">Ler Conteúdo da Página</button>
+      <button onclick="abrirModal()">Sobre o Projeto</button>
+      <button onclick="abrirModalDoacao()">💖 Ajudar o Projeto</button>
+    </section>
+
+    <footer>
+      <p>Projeto desenvolvido por Rivonildo Azevedo | © 2025 Orbis Tech Kids</p>
+    </footer>
   </div>
 
-  <div class="section">
-    <h2>🔮 Descubra seu Signo</h2>
-    <input type="date" id="dataNascimento">
-    <button onclick="verificarSigno()">Ver Meu Signo</button>
-    <p id="resultadoSigno"></p>
+  <!-- Modal Biografia -->
+  <div id="modalBiografia" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="fecharModal()">&times;</span>
+      <h2>Sobre o Projeto Orbis Tech Kids</h2>
+      <p>O Orbis Tech Kids é um projeto de educação digital desenvolvido por Rivonildo Azevedo, estudante de Engenharia de Software, com o objetivo de levar conhecimento tecnológico acessível para crianças e jovens da região de Xique-Xique, Bahia.</p>
+      <p>Através de conteúdos educativos em formato de áudio e ferramentas interativas, buscamos democratizar o acesso à informação e inspirar as novas gerações a explorarem o mundo da tecnologia.</p>
+    </div>
   </div>
 
-  <div class="section">
-    <h2>🎙️ Acessibilidade</h2>
-    <button onclick="lerPagina()">🔊 Ler Tudo</button>
-  </div>
-
-  <div class="section">
-    <button onclick="abrirModalDoacao()">💖 Ajudar o Projeto</button>
-  </div>
-
-  <!-- Modal de Doação -->
+  <!-- Modal Doação -->
   <div id="modalDoacao" class="modal">
     <div class="modal-content">
       <span class="close" onclick="fecharModalDoacao()">&times;</span>
       <h2>Ajude o Projeto Orbis Tech Kids</h2>
-      <p>Este projeto não é apenas meu, mas pertence a todas as crianças que talvez nunca tiveram uma oportunidade como essa.
-      Com sua ajuda, poderemos manter a rádio funcionando, evoluir o projeto e alcançar mais jovens com conhecimento, cultura e alegria.</p>
+      <p>Este projeto não é apenas meu, mas pertence a todas as crianças que talvez nunca tiveram uma oportunidade como essa. Com sua ajuda, poderemos manter a rádio funcionando, evoluir o projeto e alcançar mais jovens com conhecimento, cultura e alegria.</p>
       <p><strong>Chave Pix:</strong> rivonildo</p>
     </div>
   </div>
 
   <script>
+    // Service Worker Registration
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log('Service Worker registrado com sucesso!'))
+        .catch(error => console.log('Falha no registro do Service Worker:', error));
+    }
+
     function calcularIMC() {
       let pesoTexto = document.getElementById('peso').value.trim();
       let alturaTexto = document.getElementById('altura').value.trim();
@@ -154,13 +196,12 @@
     }
 
     function verificarSigno() {
-      const dataInput = document.getElementById('dataNascimento').value;
-      if (!dataInput) {
+      const data = new Date(document.getElementById('dataNascimento').value);
+      if (isNaN(data)) {
         document.getElementById('resultadoSigno').innerText = "Data inválida.";
         return;
       }
 
-      const data = new Date(dataInput);
       const dia = data.getDate();
       const mes = data.getMonth() + 1;
 
@@ -183,11 +224,17 @@
 
     function lerPagina() {
       const texto = document.body.innerText;
-      const fala = new SpeechSynthesisUtterance(texto);
-      fala.lang = 'pt-BR';
-      fala.rate = 1;
-      fala.pitch = 1;
-      window.speechSynthesis.speak(fala);
+      const speech = new SpeechSynthesisUtterance(texto);
+      speech.lang = 'pt-BR';
+      window.speechSynthesis.speak(speech);
+    }
+
+    function abrirModal() {
+      document.getElementById('modalBiografia').style.display = 'block';
+    }
+
+    function fecharModal() {
+      document.getElementById('modalBiografia').style.display = 'none';
     }
 
     function abrirModalDoacao() {
@@ -199,9 +246,14 @@
     }
 
     window.onclick = function(event) {
-      const modal = document.getElementById('modalDoacao');
-      if (event.target == modal) {
-        modal.style.display = "none";
+      const modalBio = document.getElementById('modalBiografia');
+      const modalDoacao = document.getElementById('modalDoacao');
+      
+      if (event.target == modalBio) {
+        modalBio.style.display = "none";
+      }
+      if (event.target == modalDoacao) {
+        modalDoacao.style.display = "none";
       }
     }
   </script>
