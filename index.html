@@ -99,6 +99,39 @@
       background-color: #0077b6;
       color: white;
     }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.6);
+    }
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 90%;
+      max-width: 600px;
+      border-radius: 12px;
+      text-align: left;
+    }
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
     footer {
       margin-top: 40px;
       font-size: 14px;
@@ -107,7 +140,6 @@
   </style>
 </head>
 <body>
-
   <h1>📻 Orbis Tech Kids FM</h1>
   <p>Conectando sonhos de Xique-Xique ao mundo da tecnologia!</p>
 
@@ -122,11 +154,10 @@
 
   <div class="section">
     <h2>🔧 SUPORTE ESPECIALIZADO, PROBLEMA RESOLVIDO! 🚀</h2>
-    <p>Seu canal sumiu? O app travou? 📡 Trabalhamos com todos os sistemas e sempre encontramos a solução!<br><br>
-      💬 Atendimento rápido e eficiente! Seu entretenimento SEM preocupações!</p>
+    <p>Seu canal sumiu? O app travou? 📡 Trabalhamos com todos os sistemas e sempre encontramos a solução!</p>
+    <p>💬 Atendimento rápido e eficiente! Seu entretenimento SEM preocupações!</p>
     <p>👇📲 Me chama no WhatsApp!👇</p>
     <a class="whatsapp-button" href="https://wa.me/5574999140925" target="_blank">Falar no WhatsApp</a>
-    <p>#SuportePremium #ProblemaResolvido #TVOnline</p>
   </div>
 
   <div class="section">
@@ -137,15 +168,11 @@
     <p id="resultadoIMC"></p>
   </div>
 
-  <!-- Tabela de Classificação do IMC -->
   <div class="section">
     <h2>📊 Tabela de Classificação do IMC</h2>
     <table>
       <thead>
-        <tr>
-          <th>IMC</th>
-          <th>Classificação</th>
-        </tr>
+        <tr><th>IMC</th><th>Classificação</th></tr>
       </thead>
       <tbody>
         <tr><td>Menor que 18,5</td><td>Abaixo do peso</td></tr>
@@ -171,9 +198,9 @@
   </div>
 
   <div class="section">
-    <h2>👤 Gostaria de saber mais sobre o desenvolvedor?</h2>
-    <p>Clique no botão abaixo e conheça a história por trás desta iniciativa incrível!</p>
-    <a class="whatsapp-button" href="biografia.html" style="background-color: #0077b6;">Ver Biografia</a>
+    <h2>👤 Desenvolvedor</h2>
+    <button onclick="abrirModalBiografia()">Ver Biografia</button>
+    <button onclick="abrirModalPix()">💖 Ajudar o Projeto</button>
   </div>
 
   <footer>
@@ -181,59 +208,44 @@
     © 2025 Orbis Tech Kids FM
   </footer>
 
+  <!-- Modal Biografia -->
+  <div id="modalBiografia" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="fecharModalBiografia()">&times;</span>
+      <h2>Sobre o Desenvolvedor</h2>
+      <p><strong>Rivonildo Azevedo</strong> é estudante de Engenharia de Software, apaixonado por tecnologia, inteligência artificial e impacto social. Criador da Orbis Tech Kids FM, ele visa conectar crianças de comunidades ribeirinhas e sertanejas ao mundo do conhecimento e da inovação.</p>
+    </div>
+  </div>
+
+  <!-- Modal Pix -->
+  <div id="modalPix" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="fecharModalPix()">&times;</span>
+      <h2>Ajude o Projeto Orbis Tech Kids</h2>
+      <p>Com sua contribuição, levaremos mais esperança e tecnologia às comunidades!</p>
+      <p><strong>Chave PIX:</strong> rivonildoazevedo@gmail.com</p>
+    </div>
+  </div>
+
   <script>
     function calcularIMC() {
-      let pesoTexto = document.getElementById('peso').value.trim();
-      let alturaTexto = document.getElementById('altura').value.trim();
-
-      pesoTexto = pesoTexto.replace(/[^0-9]/g, '');
-      alturaTexto = alturaTexto.replace(/[^0-9]/g, '');
-
-      const peso = parseFloat(pesoTexto);
-      const altura = parseFloat(alturaTexto) / 100;
-
+      let peso = document.getElementById('peso').value.replace(/[^0-9]/g, '');
+      let altura = document.getElementById('altura').value.replace(/[^0-9]/g, '');
+      peso = parseFloat(peso);
+      altura = parseFloat(altura) / 100;
       if (!peso || !altura) {
         document.getElementById('resultadoIMC').innerText = "Por favor, preencha peso e altura corretamente.";
-        document.getElementById('resultadoIMC').style.color = '#000';
         return;
       }
-
       const imc = peso / (altura * altura);
       let classificacao = '';
-      let mensagem = '';
-      let cor = '';
-
-      if (imc < 18.5) {
-        classificacao = 'Abaixo do peso';
-        mensagem = '⚠️ Atenção: Você está abaixo do peso ideal. Procure um nutricionista.';
-        cor = '#ffa500';
-      } else if (imc < 24.9) {
-        classificacao = 'Peso normal';
-        mensagem = '✅ Parabéns! Você está no peso ideal. Continue mantendo hábitos saudáveis!';
-        cor = '#228B22';
-      } else if (imc < 29.9) {
-        classificacao = 'Sobrepeso';
-        mensagem = '⚠️ Atenção: Você está com sobrepeso. Reavalie seus hábitos.';
-        cor = '#ff8c00';
-      } else if (imc < 34.9) {
-        classificacao = 'Obesidade grau 1';
-        mensagem = '⚠️ Cuidado: Obesidade leve. Procure acompanhamento.';
-        cor = '#ff4500';
-      } else if (imc < 39.9) {
-        classificacao = 'Obesidade grau 2';
-        mensagem = '⚠️ Atenção: Obesidade moderada. Busque ajuda médica.';
-        cor = '#dc143c';
-      } else {
-        classificacao = 'Obesidade grau 3 (mórbida)';
-        mensagem = '🚨 Alto risco: Procure ajuda médica urgente.';
-        cor = '#8b0000';
-      }
-
-      document.getElementById('resultadoIMC').innerHTML = `
-        Seu IMC é <strong>${imc.toFixed(2)}</strong> - <strong>${classificacao}</strong><br><br>
-        ${mensagem}
-      `;
-      document.getElementById('resultadoIMC').style.color = cor;
+      if (imc < 18.5) classificacao = 'Abaixo do peso';
+      else if (imc < 24.9) classificacao = 'Peso normal';
+      else if (imc < 29.9) classificacao = 'Sobrepeso';
+      else if (imc < 34.9) classificacao = 'Obesidade grau 1';
+      else if (imc < 39.9) classificacao = 'Obesidade grau 2';
+      else classificacao = 'Obesidade grau 3 (mórbida)';
+      document.getElementById('resultadoIMC').innerText = `Seu IMC é ${imc.toFixed(2)} - ${classificacao}`;
     }
 
     function verificarSigno() {
@@ -245,7 +257,6 @@
       const dia = data.getDate();
       const mes = data.getMonth() + 1;
       let signo = '';
-
       if ((mes == 1 && dia >= 20) || (mes == 2 && dia <= 18)) signo = "Aquário";
       else if ((mes == 2 && dia >= 19) || (mes == 3 && dia <= 20)) signo = "Peixes";
       else if ((mes == 3 && dia >= 21) || (mes == 4 && dia <= 19)) signo = "Áries";
@@ -258,7 +269,6 @@
       else if ((mes == 10 && dia >= 23) || (mes == 11 && dia <= 21)) signo = "Escorpião";
       else if ((mes == 11 && dia >= 22) || (mes == 12 && dia <= 21)) signo = "Sagitário";
       else signo = "Capricórnio";
-
       document.getElementById('resultadoSigno').innerText = `Seu signo é: ${signo}`;
     }
 
@@ -270,6 +280,26 @@
       fala.rate = 1;
       fala.pitch = 1;
       window.speechSynthesis.speak(fala);
+    }
+
+    function abrirModalBiografia() {
+      document.getElementById('modalBiografia').style.display = 'block';
+    }
+    function fecharModalBiografia() {
+      document.getElementById('modalBiografia').style.display = 'none';
+    }
+    function abrirModalPix() {
+      document.getElementById('modalPix').style.display = 'block';
+    }
+    function fecharModalPix() {
+      document.getElementById('modalPix').style.display = 'none';
+    }
+    window.onclick = function(event) {
+      if (event.target == document.getElementById('modalBiografia')) {
+        fecharModalBiografia();
+      } else if (event.target == document.getElementById('modalPix')) {
+        fecharModalPix();
+      }
     }
   </script>
 
