@@ -10,47 +10,37 @@
   <link rel="icon" href="icon-192.png" type="image/png">
   <meta name="theme-color" content="#0077b6">
 
+  <!-- Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log('Service Worker registrado com sucesso!'))
+        .catch(error => console.log('Falha no registro do Service Worker:', error));
+    }
+  </script>
+
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      background-color: #f0f8ff;
-      color: #333;
-    }
-
-    button {
-      background-color: #0077b6;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 16px;
-      margin-top: 10px;
-    }
-
-    button:hover {
-      background-color: #005f8a;
-    }
-
+    /* Estilo do modal de ajuda */
     .modal {
       display: none;
       position: fixed;
-      z-index: 1;
-      left: 0; top: 0;
-      width: 100%; height: 100%;
+      z-index: 999;
+      padding-top: 100px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
       overflow: auto;
-      background-color: rgba(0, 0, 0, 0.6);
+      background-color: rgba(0,0,0,0.5);
     }
 
     .modal-content {
-      background-color: #fff;
-      margin: 10% auto;
+      background-color: #fefefe;
+      margin: auto;
       padding: 20px;
-      border: 1px solid #888;
-      width: 90%;
+      border-radius: 8px;
+      width: 80%;
       max-width: 500px;
-      border-radius: 10px;
     }
 
     .close {
@@ -61,23 +51,46 @@
       cursor: pointer;
     }
 
-    .close:hover,
-    .close:focus {
-      color: black;
+    .close:hover {
+      color: #000;
     }
 
-    strong {
-      color: #0077b6;
+    /* Estilo para o botão de ajuda */
+    #botaoAjuda {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #0077b6;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #botaoAjuda:hover {
+      background-color: #005f8c;
     }
   </style>
+</head>
+<body>
+
+  <!-- Botão flutuante de Ajuda -->
+  <button id="botaoAjuda" onclick="abrirAjuda()">Ajuda</button>
+
+  <!-- Modal de Ajuda -->
+  <div id="modalAjuda" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="fecharAjuda()">&times;</span>
+      <h2>Precisa de Ajuda?</h2>
+      <p>Este aplicativo permite calcular seu IMC, descobrir seu signo e até ler a página em voz alta. Use os campos corretamente e clique nos botões para obter os resultados.</p>
+    </div>
+  </div>
+
+  <!-- Seu conteúdo continua normalmente -->
 
   <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js')
-        .then(() => console.log('Service Worker registrado com sucesso!'))
-        .catch(error => console.log('Falha no registro do Service Worker:', error));
-    }
-
     function calcularIMC() {
       let pesoTexto = document.getElementById('peso').value.trim();
       let alturaTexto = document.getElementById('altura').value.trim();
@@ -148,45 +161,27 @@
       document.getElementById('modalBiografia').style.display = 'none';
     }
 
-    function abrirModalDoacao() {
-      document.getElementById('modalDoacao').style.display = 'block';
+    // Modal de ajuda
+    function abrirAjuda() {
+      document.getElementById('modalAjuda').style.display = 'block';
     }
 
-    function fecharModalDoacao() {
-      document.getElementById('modalDoacao').style.display = 'none';
+    function fecharAjuda() {
+      document.getElementById('modalAjuda').style.display = 'none';
     }
 
+    // Fecha qualquer modal ao clicar fora
     window.onclick = function(event) {
+      const modalAjuda = document.getElementById('modalAjuda');
       const modalBio = document.getElementById('modalBiografia');
-      const modalDoa = document.getElementById('modalDoacao');
-      if (event.target == modalBio) modalBio.style.display = "none";
-      if (event.target == modalDoa) modalDoa.style.display = "none";
+
+      if (event.target == modalAjuda) {
+        modalAjuda.style.display = "none";
+      }
+      if (modalBio && event.target == modalBio) {
+        modalBio.style.display = "none";
+      }
     }
   </script>
-</head>
-<body>
-
-  <h1>Orbis Tech Kids FM</h1>
-  <p>Bem-vindo ao projeto que leva conhecimento e alegria para crianças de comunidades ribeirinhas!</p>
-
-  <!-- Botão de Doação -->
-  <button onclick="abrirModalDoacao()">💖 Ajudar o Projeto</button>
-
-  <!-- Modal de Doação -->
-  <div id="modalDoacao" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="fecharModalDoacao()">&times;</span>
-      <h2>Ajude o Projeto Orbis Tech Kids</h2>
-      <p>Este projeto não é apenas meu, mas pertence a todas as crianças que talvez nunca tiveram uma oportunidade como essa. 
-      Com sua ajuda, poderemos manter a rádio funcionando, evoluir o projeto e alcançar mais jovens com conhecimento, cultura e alegria.</p>
-      <p><strong>Chave Pix:</strong> dc0520f0-a2a6-4945-95fd-fc317b22671d</p>
-      <p><strong>Nome:</strong> Rivonildo Azevedo</p>
-      <p><strong>Banco:</strong> Nubank</p>
-      <p><strong>Agência:</strong> 0001</p>
-      <p><strong>Conta:</strong> 40280541-5</p>
-    </div>
-  </div>
-
 </body>
 </html>
-
