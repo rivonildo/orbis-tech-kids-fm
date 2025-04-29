@@ -20,12 +20,174 @@
   </script>
 
   <style>
-    /* ... [seu CSS permanece inalterado e já está completo] ... */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
+      background-color: #f0f8ff;
+      color: #333;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      color: #0077b6;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    section {
+      margin-bottom: 30px;
+      padding: 20px;
+      border-bottom: 1px solid #eee;
+    }
+
+    button {
+      background-color: #0077b6;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 5px 0;
+    }
+
+    button:hover {
+      background-color: #005f92;
+    }
+
+    input, select {
+      padding: 8px;
+      margin: 5px 0;
+      width: 100%;
+      box-sizing: border-box;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    .resultado {
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #e9f7fe;
+      border-radius: 5px;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.4);
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 600px;
+      border-radius: 10px;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: black;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 14px;
+      color: #666;
+    }
   </style>
 </head>
 <body>
+  <div class="container">
+    <header>
+      <h1>Orbis Tech Kids FM</h1>
+      <p>Educação digital e tecnológica para crianças e jovens</p>
+    </header>
 
-  <!-- ... [seu HTML permanece inalterado e já está completo] ... -->
+    <section>
+      <h2>Calculadora de IMC</h2>
+      <label for="peso">Peso (kg):</label>
+      <input type="text" id="peso" placeholder="Ex: 68.5">
+      
+      <label for="altura">Altura (cm):</label>
+      <input type="text" id="altura" placeholder="Ex: 175">
+      
+      <button onclick="calcularIMC()">Calcular IMC</button>
+      <div id="resultadoIMC" class="resultado"></div>
+    </section>
+
+    <section>
+      <h2>Descubra seu Signo</h2>
+      <label for="dataNascimento">Data de Nascimento:</label>
+      <input type="date" id="dataNascimento">
+      
+      <button onclick="verificarSigno()">Descobrir Signo</button>
+      <div id="resultadoSigno" class="resultado"></div>
+    </section>
+
+    <section>
+      <h2>Acessibilidade</h2>
+      <button onclick="lerPagina()">Ler Conteúdo da Página</button>
+      <button onclick="abrirModal()">Sobre o Projeto</button>
+      <button onclick="abrirModalDoacao()">💖 Ajudar o Projeto</button>
+    </section>
+
+    <footer>
+      <p>Projeto desenvolvido por Rivonildo Azevedo | © 2025 Orbis Tech Kids</p>
+    </footer>
+  </div>
+
+  <!-- Modal Biografia -->
+  <div id="modalBiografia" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="fecharModal()">&times;</span>
+      <h2>Sobre o Projeto Orbis Tech Kids</h2>
+      <p>O Orbis Tech Kids é um projeto de educação digital desenvolvido por Rivonildo Azevedo, estudante de Engenharia de Software, com o objetivo de levar conhecimento tecnológico acessível para crianças e jovens da região de Xique-Xique, Bahia.</p>
+      <p>Através de conteúdos educativos em formato de áudio e ferramentas interativas, buscamos democratizar o acesso à informação e inspirar as novas gerações a explorarem o mundo da tecnologia.</p>
+    </div>
+  </div>
+
+  <!-- Modal Doação -->
+  <div id="modalDoacao" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="fecharModalDoacao()">&times;</span>
+      <h2>Ajude o Projeto Orbis Tech Kids</h2>
+      <p>Este projeto não é apenas meu, mas pertence a todas as crianças que talvez nunca tiveram uma oportunidade como essa. Com sua ajuda, poderemos manter a rádio funcionando, evoluir o projeto e alcançar mais jovens com conhecimento, cultura e alegria.</p>
+      <p><strong>Chave Pix:</strong> rivonildoazevedo@gmail.com</p>
+      <p><strong>Banco:</strong> (Informe seus dados bancários aqui)</p>
+      <p>Muito obrigado por apoiar esta iniciativa!</p>
+    </div>
+  </div>
 
   <script>
     function calcularIMC() {
@@ -98,11 +260,24 @@
       document.getElementById('modalBiografia').style.display = 'none';
     }
 
+    function abrirModalDoacao() {
+      document.getElementById('modalDoacao').style.display = 'block';
+    }
+
+    function fecharModalDoacao() {
+      document.getElementById('modalDoacao').style.display = 'none';
+    }
+
     // Fechar modal ao clicar fora do conteúdo
     window.onclick = function(event) {
-      const modal = document.getElementById('modalBiografia');
-      if (event.target == modal) {
-        modal.style.display = "none";
+      const modalBio = document.getElementById('modalBiografia');
+      const modalDoacao = document.getElementById('modalDoacao');
+      
+      if (event.target == modalBio) {
+        modalBio.style.display = "none";
+      }
+      if (event.target == modalDoacao) {
+        modalDoacao.style.display = "none";
       }
     }
   </script>
