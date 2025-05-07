@@ -240,81 +240,103 @@
   </div>
 </div>
 
+<script>
+  // IMC
+  function calcularIMC() {
+    const peso = parseFloat(document.getElementById("peso").value);
+    const altura = parseFloat(document.getElementById("altura").value) / 100;
+    const imc = peso / (altura * altura);
+    let classificacao = '';
+
+    if (imc < 18.5) classificacao = 'Abaixo do peso';
+    else if (imc >= 18.5 && imc < 24.9) classificacao = 'Peso normal';
+    else if (imc >= 25.0 && imc < 29.9) classificacao = 'Sobrepeso';
+    else if (imc >= 30.0 && imc < 34.9) classificacao = 'Obesidade grau 1';
+    else if (imc >= 35.0 && imc < 39.9) classificacao = 'Obesidade grau 2';
+    else classificacao = 'Obesidade grau 3 (mórbida)';
+    
+    document.getElementById("resultadoIMC").innerHTML = `Seu IMC é ${imc.toFixed(2)} - Classificação: ${classificacao}`;
+  }
+
+  // Signo
+  function verificarSigno() {
+    const dataNascimento = new Date(document.getElementById("dataNascimento").value);
+    const mes = dataNascimento.getMonth() + 1;
+    const dia = dataNascimento.getDate();
+    let signo = '';
+
+    if ((mes == 3 && dia >= 21) || (mes == 4 && dia <= 19)) signo = 'Áries';
+    else if ((mes == 4 && dia >= 20) || (mes == 5 && dia <= 20)) signo = 'Touro';
+    else if ((mes == 5 && dia >= 21) || (mes == 6 && dia <= 20)) signo = 'Gêmeos';
+    else if ((mes == 6 && dia >= 21) || (mes == 7 && dia <= 22)) signo = 'Câncer';
+    else if ((mes == 7 && dia >= 23) || (mes == 8 && dia <= 22)) signo = 'Leão';
+    else if ((mes == 8 && dia >= 23) || (mes == 9 && dia <= 22)) signo = 'Virgem';
+    else if ((mes == 9 && dia >= 23) || (mes == 10 && dia <= 22)) signo = 'Libra';
+    else if ((mes == 10 && dia >= 23) || (mes == 11 && dia <= 21)) signo = 'Escorpião';
+    else if ((mes == 11 && dia >= 22) || (mes == 12 && dia <= 21)) signo = 'Sagitário';
+    else if ((mes == 12 && dia >= 22) || (mes == 1 && dia <= 19)) signo = 'Capricórnio';
+    else if ((mes == 1 && dia >= 20) || (mes == 2 && dia <= 18)) signo = 'Aquário';
+    else signo = 'Peixes';
+
+    document.getElementById("resultadoSigno").innerHTML = `Seu signo é ${signo}.`;
+  }
+
+  // Ler página
+  function lerPagina() {
+    const texto = document.body.innerText;
+    const speech = new SpeechSynthesisUtterance(texto);
+    speech.lang = 'pt-BR';
+    window.speechSynthesis.speak(speech);
+  }
+
+  // Modal Biografia
+  function abrirModalBiografia() {
+    document.getElementById("modalBiografia").style.display = "block";
+  }
+
+  function fecharModalBiografia() {
+    document.getElementById("modalBiografia").style.display = "none";
+  }
+
+  // Modal Pix
+  function abrirModalPix() {
+    document.getElementById("modalPix").style.display = "block";
+  }
+
+  function fecharModalPix() {
+    document.getElementById("modalPix").style.display = "none";
+  }
+</script>
   <script>
-    function calcularIMC() {
-      let peso = document.getElementById('peso').value.replace(/[^0-9]/g, '');
-      let altura = document.getElementById('altura').value.replace(/[^0-9]/g, '');
-      peso = parseFloat(peso);
-      altura = parseFloat(altura) / 100;
-      if (!peso || !altura) {
-        document.getElementById('resultadoIMC').innerText = "Por favor, preencha peso e altura corretamente.";
-        return;
-      }
-      const imc = peso / (altura * altura);
-      let classificacao = '';
-      if (imc < 18.5) classificacao = 'Abaixo do peso';
-      else if (imc < 24.9) classificacao = 'Peso normal';
-      else if (imc < 29.9) classificacao = 'Sobrepeso';
-      else if (imc < 34.9) classificacao = 'Obesidade grau 1';
-      else if (imc < 39.9) classificacao = 'Obesidade grau 2';
-      else classificacao = 'Obesidade grau 3 (mórbida)';
-      document.getElementById('resultadoIMC').innerText = `Seu IMC é ${imc.toFixed(2)} - ${classificacao}`;
+  function verificarSigno() {
+    const dataNascimento = document.getElementById('dataNascimento').value;
+    const resultado = document.getElementById('resultadoSigno');
+
+    if (!dataNascimento) {
+      resultado.textContent = "Por favor, selecione sua data de nascimento.";
+      return;
     }
 
-    function verificarSigno() {
-      const data = new Date(document.getElementById('dataNascimento').value);
-      if (!data.getDate()) {
-        document.getElementById('resultadoSigno').innerText = "Por favor, selecione uma data.";
-        return;
-      }
-      const dia = data.getDate();
-      const mes = data.getMonth() + 1;
-      let signo = '';
-      if ((mes == 1 && dia >= 20) || (mes == 2 && dia <= 18)) signo = "Aquário";
-      else if ((mes == 2 && dia >= 19) || (mes == 3 && dia <= 20)) signo = "Peixes";
-      else if ((mes == 3 && dia >= 21) || (mes == 4 && dia <= 19)) signo = "Áries";
-      else if ((mes == 4 && dia >= 20) || (mes == 5 && dia <= 20)) signo = "Touro";
-      else if ((mes == 5 && dia >= 21) || (mes == 6 && dia <= 20)) signo = "Gêmeos";
-      else if ((mes == 6 && dia >= 21) || (mes == 7 && dia <= 22)) signo = "Câncer";
-      else if ((mes == 7 && dia >= 23) || (mes == 8 && dia <= 22)) signo = "Leão";
-      else if ((mes == 8 && dia >= 23) || (mes == 9 && dia <= 22)) signo = "Virgem";
-      else if ((mes == 9 && dia >= 23) || (mes == 10 && dia <= 22)) signo = "Libra";
-      else if ((mes == 10 && dia >= 23) || (mes == 11 && dia <= 21)) signo = "Escorpião";
-      else if ((mes == 11 && dia >= 22) || (mes == 12 && dia <= 21)) signo = "Sagitário";
-      else signo = "Capricórnio";
-      document.getElementById('resultadoSigno').innerText = `Seu signo é: ${signo}`;
-    }
+    const [ano, mes, dia] = dataNascimento.split('-').map(Number);
+    let signo = "";
 
-    function lerPagina() {
-      let texto = document.body.innerText;
-      texto = texto.replace(/([\u2700-\u27BF]|[\uE000-\uF8FF]|[\uD83C-\uDBFF\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83D[\uDC00-\uDE4F])/g, '');
-      const fala = new SpeechSynthesisUtterance(texto);
-      fala.lang = 'pt-BR';
-      fala.rate = 1;
-      fala.pitch = 1;
-      window.speechSynthesis.speak(fala);
-    }
+    if ((mes === 3 && dia >= 21) || (mes === 4 && dia <= 19)) signo = "Áries";
+    else if ((mes === 4 && dia >= 20) || (mes === 5 && dia <= 20)) signo = "Touro";
+    else if ((mes === 5 && dia >= 21) || (mes === 6 && dia <= 20)) signo = "Gêmeos";
+    else if ((mes === 6 && dia >= 21) || (mes === 7 && dia <= 22)) signo = "Câncer";
+    else if ((mes === 7 && dia >= 23) || (mes === 8 && dia <= 22)) signo = "Leão";
+    else if ((mes === 8 && dia >= 23) || (mes === 9 && dia <= 22)) signo = "Virgem";
+    else if ((mes === 9 && dia >= 23) || (mes === 10 && dia <= 22)) signo = "Libra";
+    else if ((mes === 10 && dia >= 23) || (mes === 11 && dia <= 21)) signo = "Escorpião";
+    else if ((mes === 11 && dia >= 22) || (mes === 12 && dia <= 21)) signo = "Sagitário";
+    else if ((mes === 12 && dia >= 22) || (mes === 1 && dia <= 19)) signo = "Capricórnio";
+    else if ((mes === 1 && dia >= 20) || (mes === 2 && dia <= 18)) signo = "Aquário";
+    else if ((mes === 2 && dia >= 19) || (mes === 3 && dia <= 20)) signo = "Peixes";
 
-    function abrirModalBiografia() {
-      document.getElementById('modalBiografia').style.display = 'block';
-    }
-    function fecharModalBiografia() {
-      document.getElementById('modalBiografia').style.display = 'none';
-    }
-    function abrirModalPix() {
-      document.getElementById('modalPix').style.display = 'block';
-    }
-    function fecharModalPix() {
-      document.getElementById('modalPix').style.display = 'none';
-    }
-    window.onclick = function(event) {
-      if (event.target == document.getElementById('modalBiografia')) {
-        fecharModalBiografia();
-      } else if (event.target == document.getElementById('modalPix')) {
-        fecharModalPix();
-      }
-    }
-  </script>
+    resultado.textContent = `Seu signo é: ${signo}`;
+  }
+</script>
+<!-- AQUI: cole esse script antes da tag </body> -->
 
 </body>
 </html>
