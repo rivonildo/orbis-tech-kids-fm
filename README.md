@@ -16,7 +16,7 @@ Através dessa rádio online, buscamos inspirar novas gerações a sonharem mais
 
 Clique no botão abaixo para ouvir:
 
-[🎶 Ouça a Rádio](https://zeno.fm/radio/orbis-tech-kids-fm/)
+[🎶 Ouça a Rádio](https://radioorbiskids.vml10.xyz/)
 
 ---
 
