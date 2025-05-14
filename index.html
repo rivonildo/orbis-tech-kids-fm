@@ -198,8 +198,9 @@
   <p>Conectando sonhos de Xique Xique ao mundo da tecnologia!</p>
 
   <div class="player">
-    <audio controls autoplay>
-      <source src="https://217.77.8.126:8443/listen/radioorbistechkids/ao_vivo.mp3" type="audio/mpeg">
+    <button onclick="document.getElementById('radioPlayer').play()">▶️ Ouvir Rádio</button>
+    <audio id="radioPlayer" controls>
+      <source src="https://stream.radioorbiskids.vml10.xyz:8443/listen/radioorbistechkids/ao_vivo.mp3" type="audio/mpeg">
       Seu navegador não suporta o elemento de áudio HTML5.
     </audio>
   </div>
