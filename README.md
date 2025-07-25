@@ -6,7 +6,7 @@
 
 ## Sobre o Projeto
 
-O **Orbis Tech Kids FM** é uma iniciativa que visa levar **conhecimento**, **esperança** e **oportunidades** às crianças ribeirinhas e sertanejas de **Xique-Xique**, Bahia.
+O **Orbis Tech Kids FM** é uma iniciativa que visa levar **conhecimento**, **esperança** e **oportunidades** às crianças ribeirinhas e sertanejas de **Xique-Xique**, Bahia e de todo **Brasil**.
 
 Através dessa rádio online, buscamos inspirar novas gerações a sonharem mais alto, com foco em tecnologia, educação e inovação.
 
