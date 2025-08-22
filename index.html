@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orbis Tech Kids FM</title>
+
+  <!-- Fontes -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --primary-blue: #0077b6;
+      --secondary-green: #25d366;
+      --background-white: #ffffff;
+      --text-dark: #000000;
+      --accent-green: #25d366;
+      --neon-glow: #00ffbb;
+      --title-color: #FFD700;
+      --radio-bg: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+      --section-initiative: #e8f5e9;
+      --section-support: #fff3e0;
+      --section-imc: #e3f2fd;
+      --section-imc-table: #fff9c4;
+      --section-sign: #f3e5f5;
+      --section-accessibility: #f5f5f5;
+      --section-developer: #e0f2f1;
+      --radio-controls-bg: #ff33cc;
+      --title-initiative: #2E7D32;
+      --title-support: #EF6C00;
+      --title-imc: #1565C0;
+      --title-imc-table: #F9A825;
+      --title-sign: #7B1FA2;
+      --title-accessibility: #424242;
+      --title-developer: #00695C;
+      --led-text-color: #FFEB3B;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(to right, var(--primary-blue), var(--background-white), var(--secondary-green));
+      color: var(--text-dark);
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      text-align: center;
+      padding: 20px;
+      transition: transform 0.5s ease-out;
+    }
+
+    body.slide-down {
+      transform: translateY(100vh);
+    }
+
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      top: 0;
+      left: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px 0;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    .title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3rem;
+      font-weight: 900;
+      margin-bottom: 10px;
+      color: var(--title-color);
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.6), 0 0 20px rgba(255, 215, 0, 0.4);
+    }
+
+    .subtitle {
+      font-size: 1.8rem;
+      color: var(--primary-blue);
+      margin-bottom: 60px;
+      font-weight: 600;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .top-button {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      z-index: 1000;
+    }
+
+    .top-button button {
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--primary-blue);
+      border: 2px solid var(--primary-blue);
+      padding: 8px 12px;
+      border-radius: 30px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(0, 119, 182, 0.5);
+      transition: all 0.3s ease;
+      animation: floating 3s ease-in-out infinite;
+    }
+
+    .language-button {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--primary-blue);
+      border: 2px solid var(--primary-blue);
+      padding: 8px 12px;
+      border-radius: 30px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(0, 119, 182, 0.5);
+      transition: all 0.3s ease;
+    }
+
+    @keyframes floating {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .top-button button:hover, .language-button:hover {
+      background: var(--primary-blue);
+      color: white;
+      box-shadow: 0 0 25px rgba(0, 119, 182, 0.8);
+      animation: floating 1.5s ease-in-out infinite;
+    }
+
+    .radio-container {
+      width: 100%;
+      max-width: 600px;
+      min-height: 340px;
+      margin: 0 auto 30px;
+      background: var(--radio-bg);
+      border-radius: 20px;
+      padding: 25px;
+      position: relative;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+      border: 4px solid #fdbb2d;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .radio-display {
+      width: 100%;
+      height: 100px;
+      background: linear-gradient(to bottom, #0a1929, #0a1929);
+      border-radius: 12px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #fdbb2d;
+      box-shadow: 0 0 20px rgba(253, 187, 45, 0.8);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .display-text {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem;
+      color: var(--led-text-color);
+      text-shadow: 0 0 10px rgba(255, 235, 59, 0.7);
+      letter-spacing: 1px;
+      animation: scrollText 25s infinite linear;
+      white-space: nowrap;
+      padding: 0 20px;
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    @keyframes scrollText {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .radio-controls-panel {
+      background: var(--radio-controls-bg);
+      padding: 20px;
+      border-radius: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-bottom: 15px;
+      position: relative;
+      box-shadow: 0 0 10px #ff33cc, 0 0 20px #ff33cc;
+      border: 2px solid #ff66cc;
+      width: 100%;
+    }
+
+    .radio-btn {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+      transition: all 0.3s ease;
+    }
+
+    .power-btn {
+      background: linear-gradient(135deg, #ff4444, #cc0000);
+      border: 2px solid #ff0000;
+      box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+      color: white;
+    }
+
+    .power-btn.playing {
+      background: linear-gradient(135deg, #2cc46b, #128c7e);
+      border: 2px solid #1fae66;
+      box-shadow: 0 0 15px rgba(31, 174, 102, 0.7);
+    }
+
+    .volume-up {
+      background: linear-gradient(135deg, #1e88e5, #0d47a1);
+      border: 2px solid #0d47a1;
+      color: white;
+    }
+
+    .volume-down {
+      background: linear-gradient(135deg, #ff9800, #e65100);
+      border: 2px solid #e65100;
+      color: white;
+    }
+
+    .radio-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px #ffffff;
+    }
+
+    .radio-info-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid #fdbb2d;
+      color: #fdbb2d;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .radio-info-btn:hover {
+      background: #fdbb2d;
+      color: #000;
+    }
+
+    .weather-info-inside {
+      margin-top: 15px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 2px solid #fdbb2d;
+      border-radius: 12px;
+      padding: 12px;
+      color: #fdbb2d;
+      font-size: 0.95rem;
+      font-family: 'Poppins', sans-serif;
+      text-shadow: 0 0 6px rgba(253, 187, 45, 0.7);
+      display: grid;
+      gap: 6px;
+      width: 100%;
+    }
+
+    .weather-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .section {
+      border-radius: 15px;
+      padding: 25px;
+      margin: 25px 0;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      text-align: left;
+      position: relative;
+    }
+
+    .section-initiative {
+      background: var(--section-initiative);
+    }
+
+    .section-support {
+      background: var(--section-support);
+    }
+
+    .section-imc {
+      background: var(--section-imc);
+    }
+
+    .section-imc-table {
+      background: var(--section-imc-table);
+    }
+
+    .section-sign {
+      background: var(--section-sign);
+    }
+
+    .section-accessibility {
+      background: var(--section-accessibility);
+    }
+
+    .section-developer {
+      background: var(--section-developer);
+    }
+
+    .section h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+
+    .section-initiative h2 {
+      color: var(--title-initiative);
+    }
+
+    .section-support h2 {
+      color: var(--title-support);
+    }
+
+    .section-imc h2 {
+      color: var(--title-imc);
+    }
+
+    .section-imc-table h2 {
+      color: var(--title-imc-table);
+    }
+
+    .section-sign h2 {
+      color: var(--title-sign);
+    }
+
+    .section-accessibility h2 {
+      color: var(--title-accessibility);
+    }
+
+    .section-developer h2 {
+      color: var(--title-developer);
+    }
+
+    .section p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .info-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--primary-blue);
+      color: var(--primary-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .info-btn:hover {
+      background: var(--primary-blue);
+      color: white;
+      transform: scale(1.1);
+    }
+
+    .whatsapp-button {
+      background: linear-gradient(90deg, var(--accent-green), #128C7E);
+      color: white;
+      padding: 15px 30px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.2rem;
+      display: inline-block;
+      margin-top: 20px;
+      box-shadow: 0 5px 15px rgba(37, 211, 102, 0.5);
+      transition: all 0.3s ease;
+    }
+
+    .whatsapp-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(37, 211, 102, 0.8);
+    }
+
+    input, button {
+      padding: 12px 20px;
+      margin: 10px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 2px solid var(--primary-blue);
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--text-dark);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    button {
+      background: linear-gradient(90deg, var(--primary-blue), #005f8a);
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(0, 119, 182, 0.5);
+    }
+
+    table {
+      margin: 20px auto;
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 600px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 15px;
+      border: 1px solid var(--primary-blue);
+      text-align: left;
+    }
+
+    th {
+      background: rgba(0, 119, 182, 0.2);
+      color: var(--primary-blue);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .modal-content {
+      background: linear-gradient(135deg, #ffffff, #f0f0f0);
+      margin: 5% auto;
+      padding: 30px;
+      border: 2px solid var(--primary-blue);
+      width: 90%;
+      max-width: 600px;
+      border-radius: 15px;
+      box-shadow: 0 0 30px rgba(0, 119, 182, 0.5);
+      position: relative;
+      animation: modalFadeIn 0.5s;
+      color: var(--text-dark);
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: translateY(-50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .close:hover {
+      color: var(--primary-blue);
+    }
+
+    footer {
+      margin-top: 50px;
+      text-align: center;
+      padding: 30px;
+      font-size: 1rem;
+      color: var(--primary-blue);
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      border: 2px solid var(--primary-blue);
+      box-shadow: 0 5px 15px rgba(0, 119, 182, 0.3);
+    }
+
+    #wind-turbines-container {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .neon-text {
+      color: var(--title-color);
+      text-shadow:
+        0 0 5px var(--title-color),
+        0 0 10px var(--title-color),
+        0 0 20px var(--title-color),
+        0 0 40px var(--neon-glow),
+        0 0 80px var(--neon-glow);
+      animation: pulsate 2s infinite alternate;
+    }
+
+    @keyframes pulsate {
+      100% {
+        text-shadow: 
+          0 0 5px #fff,
+          0 0 10px #fff,
+          0 0 15px #fff,
+          0 0 20px var(--title-color),
+          0 0 35px var(--title-color),
+          0 0 40px var(--title-color);
+      }
+      0% {
+        text-shadow: 
+          0 0 2px #fff,
+          0 0 5px #fff,
+          0 0 10px var(--title-color),
+          0 0 15px var(--title-color),
+          0 0 20px var(--title-color);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .title {
+        font-size: 2.2rem;
+      }
+      
+      .subtitle {
+        font-size: 1.4rem;
+        margin-bottom: 70px;
+      }
+      
+      .radio-container {
+        width: 95%;
+        min-height: 300px;
+      }
+      
+      .display-text {
+        font-size: 0.9rem;
+      }
+      
+      .section {
+        padding: 20px;
+      }
+      
+      .radio-controls-panel {
+        gap: 15px;
+        padding: 15px;
+      }
+      
+      .radio-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+      }
+      
+      .top-button button {
+        padding: 6px 10px;
+        font-size: 11px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="particles-js"></div>
+  <div id="wind-turbines-container"></div>
+
+  <div class="container">
+    <!-- Botões superiores nas laterais -->
+    <div class="top-button">
+      <button onclick="ajudarProjeto()">Ajudar Projeto</button>
+    </div>
+
+    <div class="language-button" id="languageButton">
+      🌐 PT
+    </div>
+
+    <header>
+      <h1 class="title neon-text">📻 ORBIS TECH KIDS FM</h1>
+      <p class="subtitle" data-translate="subtitle">Levando educação e tecnologia de Xique Xique para o Brasil e o mundo!</p>
+    </header>
+
+    <!-- Rádio com display -->
+    <div class="radio-container">
+      <div class="radio-display">
+        <div class="display-text" id="radioDisplay">🎧✨ SEJA BEM-VINDO À RÁDIO ORBIS TECH KIDS FM | O LUGAR ONDE A DIVERSÃO GANHA VOZ, A IMAGINAÇÃO TEM TRILHA SONORA E CADA CRIANÇA É A ESTRELA DO NOSSO SHOW! 🌟</div>
+      </div>
+      <div class="radio-controls-panel">
+        <div class="radio-btn power-btn" onclick="toggleRadio()" id="powerBtn" title="Ligar/Desligar">
+          <i class="fas fa-power-off"></i>
+        </div>
+        <div class="radio-btn volume-up" onclick="changeVolume(0.1)" title="Aumentar volume">
+          <i class="fas fa-volume-up"></i>
+        </div>
+        <div class="radio-btn volume-down" onclick="changeVolume(-0.1)" title="Diminuir volume">
+          <i class="fas fa-volume-down"></i>
+        </div>
+        <div class="radio-info-btn" onclick="abrirModalInfo('Controles do Rádio', 'Use estes botões para controlar a reprodução da rádio:<br><br>• Botão Vermelho/Verde: Liga/Desliga a rádio<br>• Botão Azul (+): Aumenta o volume<br>• Botão Laranja (-): Diminui o volume<br><br>Aproveite a programação da Orbis Tech Kids FM!')">i</div>
+      </div>
+
+      <!-- Informações dentro do rádio -->
+      <div class="weather-info-inside" id="weatherBox">
+        <div class="weather-row" id="location">📍 Localizando...</div>
+        <div class="weather-row" id="weather">⛅ Carregando clima...</div>
+        <div class="weather-row" id="time">📅 --/--/---- 🕒 --:--:--</div>
+      </div>
+    </div>
+
+    <!-- Restante do conteúdo... -->
+    <div class="section section-initiative">
+      <div class="info-btn" onclick="abrirModalInfo('Iniciativa Orbis Tech Kids', 'Esta iniciativa transforma vidas através do conhecimento, levando esperança e oportunidades para crianças ribeirinhas, sertanejas e de comunidades esquecidas por todo o Brasil.<br><br>De Xique Xique para o país inteiro, um movimento de amor, educação e futuro!')">i</div>
+      <p data-translate="initiative">💚 Uma iniciativa que transforma vidas por meio do conhecimento, levando esperança e oportunidades às crianças ribeirinhas, sertanejas e de comunidades esquecidas por todo o Brasil. De Xique Xique para o país inteiro, um movimento de amor, educação e futuro!</p>
+    </div>
+
+    <div class="section section-support">
+      <div class="info-btn" onclick="abrirModalInfo('Suporte Especializado', 'Oferecemos suporte técnico especializado para sistemas de TV and aplicativos.<br><br>Resolvemos problemas como:<br>• Canais que desapareceram<br>• Aplicativos que travam<br>• Configurações de sistema<br>• E muito mais!<br><br>Trabalhamos com todos os sistemas e sempre encontramos a solução para que você tenha entretenimento sem preocupações.')">i</div>
+      <h2 data-translate="supportTitle">🔧 SUPORTE ESPECIALIZADO, PROBLEMA RESOLVIDO! 🚀</h2>
+      <p data-translate="supportText1">Seu canal sumiu? O app travou? 📡 Trabalhamos com todos os sistemas e sempre encontramos a solução!</p>
+      <p data-translate="supportText2">💬 Atendimento rápido e eficiente! Seu entretenimento SEM preocupações!</p>
+      <p data-translate="supportText3">👇📲 Me chama no WhatsApp!👇</p>
+      <a class="whatsapp-button" href="https://wa.me/5574999140925" target="_blank" data-translate="whatsappButton">FALAR NO WHATSAPP</a>
+    </div>
+
+    <!-- Demais seções (IMC, Signo, etc.) -->
+    <div class="section section-imc">
+      <div class="info-btn" onclick="abrirModalInfo('Calculadora de IMC', 'O Índice de Massa Corporal (IMC) é uma medida importante para avaliar se seu peso está adequado para sua altura.<br><br>Manter um IMC saudável é fundamental para prevenir doenças como diabetes, hipertensão e problemas cardiovasculares.<br><br>Use esta calculadora para verificar seu IMC regularmente.')">i</div>
+      <h2 data-translate="imcTitle">🧮 CALCULADORA DE IMC</h2>
+      <input type="text" id="peso" placeholder="Peso (kg)" data-translate="weightPlaceholder">
+      <input type="text" id="altura" placeholder="Altura (cm)" data-translate="heightPlaceholder">
+      <button onclick="calcularIMC()" data-translate="calculateButton">CALCULAR IMC</button>
+      <p id="resultadoIMC"></p>
+    </div>
+
+    <div class="section section-imc-table">
+      <div class="info-btn" onclick="abrirModalInfo('Tabela de Classificação do IMC', 'Esta tabela classifica os valores de IMC conforme diretrizes da Organização Mundial da Saúde.<br><br>A classificação ajuda a identificar possíveis riscos à saúde associados ao peso.<br><br>Lembre-se que o IMC é uma referência, mas outros fatores como composição corporal and distribuição de gordura também são importantes.<br><br>Consulte sempre um profissional de saúde.')">i</div>
+      <h2 data-translate="imcTableTitle">📊 TABELA DE CLASSIFICAÇÃO DO IMC</h2>
+      <table>
+        <thead>
+          <tr><th data-translate="imcHeader">IMC</th><th data-translate="classificationHeader">CLASSIFICAÇÃO</th></tr>
+        </thead>
+        <tbody>
+          <tr><td data-translate="imc1">Menor que 18,5</td><td data-translate="classification1">Abaixo do peso</td></tr>
+          <tr><td data-translate="imc2">18,5 a 24,9</td><td data-translate="classification2">Peso normal</td></tr>
+          <tr><td data-translate="imc3">25,0 a 29,9</td><td data-translate="classification3">Sobrepeso</td></tr>
+          <tr><td data-translate="imc4">30,0 a 34,9</td><td data-translate="classification4">Obesidade grau 1</td></tr>
+          <tr><td data-translate="imc5">35,0 a 39,9</td><td data-translate="classification5">Obesidade grau 2</td></tr>
+          <tr><td data-translate="imc6">40,0 ou mais</td><td data-translate="classification6">Obesidade grau 3 (mórbida)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section section-sign">
+      <div class="info-btn" onclick="abrirModalInfo('Descubra Seu Signo', 'A astrologia estuda a influência dos corpos celestes em nossa personalidade and destino.<br><br>Cada signo tem características únicas:<br>• Áries: Corajoso and determinado<br>• Touro: Prático and confiável<br>• Gêmeos: Adaptável and comunicativo<br>• Câncer: Emocional and simpático<br>• Leão: Criativo and extrovertido<br>• Virgem: Leal and analítico<br>• Libra: Cooperativo and diplomático<br>• Escorpião: Determinado and passiona<br>• Sagitário: Idealista and alegre<br>• Capricórnio: Prático and disciplinado<br>• Aquário: Original and independente<br>• Peixes: Sensível and compassivo')">i</div>
+      <h2 data-translate="signTitle">🔮 DESCUBRA SEU SIGNO</h2>
+      <input type="date" id="dataNascimento">
+      <button onclick="verificarSigno()" data-translate="signButton">VER MEU SIGNO</button>
+      <p id="resultadoSigno"></p>
+    </div>
+
+    <div class="section section-accessibility">
+      <div class="info-btn" onclick="abrirModalInfo('Acessibilidade', 'Esta funcionalidade permite que pessoas com deficiência visual ou dificuldade de leitura possam ouvir o conteúdo completo da página.<br><br>Utiliza a tecnologia de síntese de voz do navegador para converter texto em áudio.<br><br>Clique no botão \"Ler Tudo\" para ativar a narração.<br><br>Você também pode parar a leitura a qualquer momento clicando novamente no botão.')">i</div>
+      <h2 data-translate="accessibilityTitle">🎙️ ACESSIBILIDADE: OUÇA ESTA PÁGINA</h2>
+      <button id="botaoLeitura" onclick="lerPagina()" data-translate="readButton">🔊 LER TUDO</button>
+    </div>
+
+    <div class="section section-developer">
+      <div class="info-btn" onclick="abrirModalInfo('Desenvolvedor', 'Rivonildo Azevedo é estudante de Tecnologia da Informação, apaixonado por TI e impacto social.<br><br>Criador da Orbis Tech Kids FM, ele visa conectar crianças de comunidades ribeirinhas e sertanejas ao mundo do conhecimento e da inovação.<br><br>Seu trabalho é voluntário e depende de doações para se manter.')">i</div>
+      <h2 data-translate="developerTitle">👤 DESENVOLVEDOR</h2>
+      <button onclick="abrirModalBiografia()" data-translate="bioButton">VER BIOGRAFIA</button>
+      <button onclick="abrirModalPix()" data-translate="helpButton">💖 AJUDAR O PROJETO</button>
+    </div>
+
+    <footer>
+      <p data-translate="footerText">🌟 Projeto idealizado por Rivonildo Azevedo – Um sonho movido pelo poder do conhecimento, construindo pontes de oportunidade para transformar o presente e inspirar o futuro da nossa gente!</p>
+      <p>© 2025 ORBIS TECH KIDS FM</p>
+    </footer>
+  </div>
+
+  <!-- Modais -->
+  <div id="modalBiografia" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="fecharModal('modalBiografia')">&times;</span>
+      <h2 data-translate="aboutTitle">SOBRE O DESENVOLVEDOR</h2>
+      <p data-translate="aboutText"><strong>Rivonildo Azevedo</strong> é estudante de Tecnologia da Informação, apaixonado por TI and impacto social. Criador da Orbis Tech Kids FM, ele visa conectar crianças de comunidades ribeirinhas e sertanejas ao mundo do conhecimento and da inovação.</p>
+    </div>
+  </div>
+
+  <div id="modalPix" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="fecharModal('modalPix')">&times;</span>
+      <h2 data-translate="helpTitle">AJUDE O PROJETO ORBIS TECH KIDS</h2>
+      <p data-translate="helpText1">Com sua contribuição, levaremos mais esperança, tecnologia and alegria às comunidades ribeirinhas and sertanejas!</p>
+
+      <p><strong data-translate="bankLabel">Banco:</strong> Nubank (260)</p>
+      <p><strong data-translate="agencyLabel">Agência:</strong> 0001</p>
+      <p><strong data-translate="accountLabel">Conta:</strong> 40280541-5</p>
+      <p><strong data-translate="holderLabel">Titular:</strong> Rivonildo Azevedo</p>
+      <p><strong data-translate="pixLabel">Chave PIX (código aleatório):</strong><br>dc0520f0-a2a6-4945-95fd-fc317b22671d</p>
+
+      <p data-translate="helpText2">📲 Após doar, envie o comprovante para o nosso WhatsApp:
+        <a href="https://wa.me/5574999140925" target="_blank" data-translate="helpLink">Clique aqui para enviar</a>
+      </p>
+
+      <p data-translate="helpText3">🎉 Peça já o seu "alô personalizado"! Escolha o personagem favorito do seu filho ou filha and envie pra gente o nome dele(a). Vamos preparar um recadinho especial cheio de carinho and diversão, feito sob medida para arrancar sorrisos! 💌✨</p>
+
+      <p data-translate="helpText4">🎉 Locutores personagens disponíveis para mandar alô: Peppa Pig, Shrek, Mickey, Pato Donald e muito mais! Fique à vontade para sugestões de músicas e, para melhorar nossa programação, seu feedback é importantíssimo.</p>
+    </div>
+  </div>
+
+  <!-- Modal de Informações (novo) -->
+  <div id="modalInfo" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="fecharModal('modalInfo')">&times;</span>
+      <h2 id="modalInfoTitle"></h2>
+      <p id="modalInfoContent"></p>
+    </div>
+  </div>
+
+  <!-- Elemento de áudio (oculto) -->
+  <audio id="radioPlayer" loop>
+    <source src="https://radio.vml10.xyz/listen/orbis_kids_fm/radio.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    // Variáveis globais
+    let currentLanguage = 'pt';
+    const translations = {
+      pt: {
+        welcome: "🎧✨ SEJA BEM-VINDO À RÁDIO ORBIS TECH KIDS FM | O LUGAR ONDE A DIVERSÃO GANHA VOZ, A IMAGINAÇÃO TEM TRILHA SONORA E CADA CRIANÇA É A ESTRELA DO NOSSO SHOW! 🌟",
+        location: "📍 Localizando...",
+        weather: "⛅ Carregando clima...",
+        time: "📅 --/--/---- 🕒 --:--:--",
+        subtitle: "Levando educação e tecnologia de Xique Xique para o Brasil e o mundo!",
+        initiative: "💚 Uma iniciativa que transforma vidas por meio do conhecimento, levando esperança e oportunidades às crianças ribeirinhas, sertanejas and de comunidades esquecidas por todo o Brasil. De Xique Xique para o país inteiro, um movimento de amor, educação e futuro!",
+        supportTitle: "🔧 SUPORTE ESPECIALIZADO, PROBLEMA RESOLVIDO! 🚀",
+        supportText1: "Seu canal sumiu? O app travou? 📡 Trabalhamos com todos os sistemas e sempre encontramos a solução!",
+        supportText2: "💬 Atendimento rápido e eficiente! Seu entretenimento SEM preocupações!",
+        supportText3: "👇📲 Me chama no WhatsApp!👇",
+        whatsappButton: "FALAR NO WHATSAPP",
+        imcTitle: "🧮 CALCULADORA DE IMC",
+        weightPlaceholder: "Peso (kg)",
+        heightPlaceholder: "Altura (cm)",
+        calculateButton: "CALCULAR IMC",
+        imcTableTitle: "📊 TABELA DE CLASSIFICAÇÃO DO IMC",
+        imcHeader: "IMC",
+        classificationHeader: "CLASSIFICAÇÃO",
+        imc1: "Menor que 18,5",
+        classification1: "Abaixo do peso",
+        imc2: "18,5 a 24,9",
+        classification2: "Peso normal",
+        imc3: "25,0 a 29,9",
+        classification3: "Sobrepeso",
+        imc4: "30,0 a 34,9",
+        classification4: "Obesidade grau 1",
+        imc5: "35,0 a 39,9",
+        classification5: "Obesidade grau 2",
+        imc6: "40,0 ou mais",
+        classification6: "Obesidade grau 3 (mórbida)",
+        signTitle: "🔮 DESCUBRA SEU SIGNO",
+        signButton: "VER MEU SIGNO",
+        accessibilityTitle: "🎙️ ACESSIBILIDADE: OUÇA ESTA PÁGINA",
+        readButton: "🔊 LER TUDO",
+        developerTitle: "👤 DESENVOLVEDOR",
+        bioButton: "VER BIOGRAFIA",
+        helpButton: "💖 AJUDAR O PROJETO",
+        footerText: "🌟 Projeto idealizado por Rivonildo Azevedo – Um sonho movido pelo poder do conhecimento, construindo pontes de oportunidade para transformar o presente e inspirar o futuro da nossa gente!",
+        aboutTitle: "SOBRE O DESENVOLVEDOR",
+        aboutText: "<strong>Rivonildo Azevedo</strong> é estudante de Tecnologia da Informação, apaixonado por TI and impacto social. Criador da Orbis Tech Kids FM, ele visa conectar crianças de comunidades ribeirinhas e sertanejas ao mundo do conhecimento and da inovação.",
+        helpTitle: "AJUDE O PROJETO ORBIS TECH KIDS",
+        helpText1: "Com sua contribuição, levaremos mais esperança, tecnologia and alegria às comunidades ribeirinhas and sertanejas!",
+        bankLabel: "Banco:",
+        agencyLabel: "Agência:",
+        accountLabel: "Conta:",
+        holderLabel: "Titular:",
+        pixLabel: "Chave PIX (código aleatório):",
+        helpText2: "📲 Após doar, envie o comprovante para o nosso WhatsApp:",
+        helpLink: "Clique aqui para enviar",
+        helpText3: "🎉 Peça já o seu alô personalizado Escolha o personagem favorito do seu filho ou filha and envie pra gente o nome dele(a). Vamos preparar um recadinho especial cheio de carinho and diversão, feito sob medida para arrancar sorrisos 💌✨",
+        helpText4: "🎉 Locutores personagens disponíveis para mandar alô: Peppa Pig, Shrek, Mickey, Pato Donald e muito mais! Fique à vontade para sugestões de músicas e, para melhorar nossa programação, seu feedback é importantíssimo."
+      },
+      en: {
+        welcome: "🎧✨ WELCOME TO ORBIS TECH KIDS FM | THE PLACE WHERE FUN GAINS A VOICE, IMAGINATION HAS A SOUNDTRACK AND EVERY CHILD IS THE STAR OF OUR SHOW! 🌟",
+        location: "📍 Locating...",
+        weather: "⛅ Loading weather...",
+        time: "📅 --/--/---- 🕒 --:--:--",
+        subtitle: "Taking education and technology from Xique Xique to Brazil and the world!",
+        initiative: "💚 An initiative that transforms lives through knowledge, bringing hope and opportunities to riverside, countryside and forgotten community children throughout Brazil. From Xique Xique to the entire country, a movement of love, education and future!",
+        supportTitle: "🔧 SPECIALIZED SUPPORT, PROBLEM SOLVED! 🚀",
+        supportText1: "Your channel disappeared? The app crashed? 📡 We work with all systems and always find the solution!",
+        supportText2: "💬 Fast and efficient service! Your entertainment WITHOUT worries!",
+        supportText3: "👇📲 Call me on WhatsApp!👇",
+        whatsappButton: "TALK ON WHATSAPP",
+        imcTitle: "🧮 BMI CALCULATOR",
+        weightPlaceholder: "Weight (kg)",
+        heightPlaceholder: "Height (cm)",
+        calculateButton: "CALCULATE BMI",
+        imcTableTitle: "📊 BMI CLASSIFICATION TABLE",
+        imcHeader: "BMI",
+        classificationHeader: "CLASSIFICATION",
+        imc1: "Less than 18.5",
+        classification1: "Underweight",
+        imc2: "18.5 to 24.9",
+        classification2: "Normal weight",
+        imc3: "25.0 to 29.9",
+        classification3: "Overweight",
+        imc4: "30.0 to 34.9",
+        classification4: "Obesity grade 1",
+        imc5: "35.0 to 39.9",
+        classification5: "Obesity grade 2",
+        imc6: "40.0 or more",
+        classification6: "Obesity grade 3 (morbid)",
+        signTitle: "🔮 DISCOVER YOUR ZODIAC SIGN",
+        signButton: "SEE MY SIGN",
+        accessibilityTitle: "🎙️ ACCESSIBILITY: LISTEN TO THIS PAGE",
+        readButton: "🔊 READ ALL",
+        developerTitle: "👤 DEVELOPER",
+        bioButton: "SEE BIOGRAPHY",
+        helpButton: "💖 HELP THE PROJECT",
+        footerText: "🌟 Project conceived by Rivonildo Azevedo – A dream driven by the power of knowledge, building bridges of opportunity to transform the present and inspire the future of our people!",
+        aboutTitle: "ABOUT THE DEVELOPER",
+        aboutText: "<strong>Rivonildo Azevedo</strong> is an Information Technology student, passionate about IT and social impact. Creator of Orbis Tech Kids FM, he aims to connect children from riverside and countryside communities to the world of knowledge and innovation.",
+        helpTitle: "HELP THE ORBIS TECH KIDS PROJECT",
+        helpText1: "With your contribution, we will bring more hope, technology and joy to riverside and countryside communities!",
+        bankLabel: "Bank:",
+        agencyLabel: "Agency:",
+        accountLabel: "Account:",
+        holderLabel: "Holder:",
+        pixLabel: "PIX key (random code):",
+        helpText2: "📲 After donating, send the receipt to our WhatsApp:",
+        helpLink: "Click here to send",
+        helpText3: "🎉 Request your personalized hello! Choose your child's favorite character and send us their name. We'll prepare a special message full of affection and fun, tailored to bring smiles! 💌✨",
+        helpText4: "🎉 Character announcers available to say hello: Peppa Pig, Shrek, Mickey, Donald Duck and much more! Feel free to suggest songs and, to improve our programming, your feedback is very important."
+      },
+      es: {
+        welcome: "🎧✨ BIENVENIDO A ORBIS TECH KIDS FM | ¡EL LUGAR DONDE LA DIVERSIÓN TIENE VOZ, LA IMAGINACIÓN TIENE BANDA SONORA AND CADA NIÑO ES LA ESTRELA DE NUESTRO PROGRAMA! 🌟",
+        location: "📍 Localizando...",
+        weather: "⛅ Cargando clima...",
+        time: "📅 --/--/---- 🕒 --:--:--",
+        subtitle: "¡Llevando educación y tecnología de Xique Xique a Brasil y al mundo!",
+        initiative: "💚 Una iniciativa que transforma vidas a través del conocimiento, llevando esperanza and oportunidades a los niños ribereños, del campo y de comunidades olvidadas en todo Brasil. ¡De Xique Xique para todo el país, un movimiento de amor, educación and futuro!",
+        supportTitle: "🔧 ¡SOPORTE ESPECIALIZADO, PROBLEMA RESUELTO! 🚀",
+        supportText1: "¿Desapareció tu canal? ¿Se bloqueó la aplicación? 📡 ¡Trabajamos con todos los sistemas and siempre encontramos la solución!",
+        supportText2: "💬 ¡Atención rápida and eficiente! ¡Tu entretenimiento SIN preocupaciones!",
+        supportText3: "👇📲 ¡Llámame por WhatsApp!👇",
+        whatsappButton: "HABLAR POR WHATSAPP",
+        imcTitle: "🧮 CALCULADORA DE IMC",
+        weightPlaceholder: "Peso (kg)",
+        heightPlaceholder: "Altura (cm)",
+        calculateButton: "CALCULAR IMC",
+        imcTableTitle: "📊 TABLA DE CLASIFICACIÓN DEL IMC",
+        imcHeader: "IMC",
+        classificationHeader: "CLASIFICACIÓN",
+        imc1: "Menor que 18,5",
+        classification1: "Bajo peso",
+        imc2: "18,5 a 24,9",
+        classification2: "Peso normal",
+        imc3: "25,0 a 29,9",
+        classification3: "Sobrepeso",
+        imc4: "30,0 a 34,9",
+        classification4: "Obesidad grado 1",
+        imc5: "35,0 a 39,9",
+        classification5: "Obesidad grado 2",
+        imc6: "40,0 o más",
+        classification6: "Obesidad grado 3 (mórbida)",
+        signTitle: "🔮 DESCUBRE TU SIGNO ZODIACAL",
+        signButton: "VER MI SIGNO",
+        accessibilityTitle: "🎙️ ACCESIBILIDAD: ESCUCHA ESTA PÁGINA",
+        readButton: "🔊 LEER TODO",
+        developerTitle: "👤 DESARROLLADOR",
+        bioButton: "VER BIOGRAFÍA",
+        helpButton: "💖 AYUDAR AL PROYECTO",
+        footerText: "🌟 Proyecto ideado por Rivonildo Azevedo – ¡Un sueño impulsado por el poder del conocimiento, construyendo puentes de oportunidad para transformar el presente e inspirar el futuro de nuestra gente!",
+        aboutTitle: "SOBRE EL DESARROLLADOR",
+        aboutText: "<strong>Rivonildo Azevedo</strong> es estudiante de Tecnología de la Información, apasionado por la TI y el impacto social. Creador de Orbis Tech Kids FM, busca conectar a los niños de comunidades ribereñas and del campo con el mundo del conocimiento and la innovación.",
+        helpTitle: "AYUDA AL PROYECTO ORBIS TECH KIDS",
+        helpText1: "¡Con tu contribución, llevaremos más esperanza, tecnología and alegría a las comunidades ribereñas and del campo!",
+        bankLabel: "Banco:",
+        agencyLabel: "Agencia:",
+        accountLabel: "Cuenta:",
+        holderLabel: "Titular:",
+        pixLabel: "Clave PIX (código aleatorio):",
+        helpText2: "📲 Después de donar, envía el comprobante a nuestro WhatsApp:",
+        helpLink: "Haz clic aquí para enviar",
+        helpText3: "🎉 ¡Pide ya tu saludo personalizado! Elige el personagem favorito de tu hijo o hija and envíanos su nombre. ¡Prepararemos un mensaje especial lleno de cariño and diversión, hecho a medida para sacar sonrisas! 💌✨",
+        helpText4: "🎉 Locutores de personajes disponibles para saludar: Peppa Pig, Shrek, Mickey, Pato Donald and mucho más. ¡Siéntete libre de sugerir canciones and, para mejorar nuestra programación, tus comentarios son muy importantes!"
+      }
+    };
+
+    // Inicializar partículas
+    particlesJS('particles-js', {
+      particles: {
+        number: { value: 60, density: { enable: true, value_area: 800 } },
+        color: { value: "#0077b6" },
+        shape: { type: "circle" },
+        opacity: { value: 0.5, random: true },
+        size: { value: 3, random: true },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#0077b6",
+          opacity: 0.4,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 2,
+          direction: "none",
+          random: true,
+          straight: false,
+          out_mode: "out",
+          bounce: false
+        }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "repulse" },
+          onclick: { enable: true, mode: "push" },
+          resize: true
+        }
+      }
+    });
+
+    // Iniciar o rádio automaticamente
+    window.onload = function() {
+      const radioPlayer = document.getElementById('radioPlayer');
+      radioPlayer.volume = 0.7;
+      
+      // Relógio em tempo real
+      updateTime();
+      setInterval(updateTime, 1000);
+
+      // Localização + Clima automáticos
+      initGeoWeather();
+      
+      // Atualizar display com informações de tempo
+      updateDisplayWithTime();
+      
+      // Configurar botão de idioma
+      setupLanguageButton();
+    };
+
+    // Configurar botão de idioma
+    function setupLanguageButton() {
+      const languageButton = document.getElementById('languageButton');
+      languageButton.addEventListener('click', toggleLanguage);
+    }
+
+    // Alternar idioma
+    function toggleLanguage() {
+      const languages = ['pt', 'en', 'es'];
+      const currentIndex = languages.indexOf(currentLanguage);
+      const nextIndex = (currentIndex + 1) % languages.length;
+      currentLanguage = languages[nextIndex];
+      
+      // Atualizar texto do botão
+      document.getElementById('languageButton').textContent = 
+        currentLanguage === 'pt' ? '🌐 PT' : 
+        currentLanguage === 'en' ? '🌐 EN' : '🌐 ES';
+      
+      // Atualizar textos da página
+      updatePageLanguage();
+    }
+
+    // Atualizar textos da página com o idioma selecionado
+    function updatePageLanguage() {
+      // Atualizar todos os elementos com data-translate
+      const elements = document.querySelectorAll('[data-translate]');
+      elements.forEach(element => {
+        const key = element.getAttribute('data-translate');
+        if (translations[currentLanguage][key]) {
+          if (element.tagName === 'INPUT') {
+            element.placeholder = translations[currentLanguage][key];
+          } else {
+            element.innerHTML = translations[currentLanguage][key];
+          }
+        }
+      });
+      
+      // Atualizar texto de boas-vindas no display
+      document.getElementById('radioDisplay').textContent = translations[currentLanguage].welcome;
+      
+      // Atualizar textos de localização, clima e tempo
+      document.getElementById('location').textContent = translations[currentLanguage].location;
+      document.getElementById('weather').textContent = translations[currentLanguage].weather;
+    }
+
+    // Função para atualizar o display com informações de tempo
+    function updateDisplayWithTime() {
+      const now = new Date();
+      const timeString = now.toLocaleTimeString('pt-BR');
+      const displayElement = document.getElementById('radioDisplay');
+      
+      // Alternar entre o nome da rádio e a hora atual
+      if (displayElement.dataset.showingTime) {
+        displayElement.textContent = translations[currentLanguage].welcome;
+        displayElement.dataset.showingTime = false;
+      } else {
+        displayElement.textContent = `🕒 ${timeString} • BRASIL •`;
+        displayElement.dataset.showingTime = true;
+      }
+    }
+
+    // Iniciar a alternância no display
+    setInterval(updateDisplayWithTime, 5000);
+
+    // Controles do rádio
+    function toggleRadio() {
+      const radioPlayer = document.getElementById('radioPlayer');
+      const powerBtn = document.getElementById('powerBtn');
+      if (radioPlayer.paused) {
+        radioPlayer.play().catch(error => {
+          console.log("Reprodução automática prevenida pelo navegador:", error);
+          alert("🔊 Para começar a ouvir a Orbis Tech Kids FM, clique no botão VERDE de energia do rádio.");
+        });
+        powerBtn.classList.add('playing');
+        powerBtn.innerHTML = '<i class="fas fa-power-off" style="color:#00ff88;"></i>';
+        powerBtn.style.boxShadow = '0 0 15px #00ff88';
+      } else {
+        radioPlayer.pause();
+        powerBtn.classList.remove('playing');
+        powerBtn.innerHTML = '<i class="fas fa-power-off"></i>';
+        powerBtn.style.boxShadow = '';
+      }
+    }
+
+    function changeVolume(delta) {
+      const radioPlayer = document.getElementById('radioPlayer');
+      radioPlayer.volume = Math.max(0, Math.min(1, radioPlayer.volume + delta));
+    }
+
+    // Relógio (sempre visível) com data
+    function updateTime() {
+      const now = new Date();
+      const dateString = now.toLocaleDateString('pt-BR');
+      const timeString = now.toLocaleTimeString('pt-BR');
+      document.getElementById('time').textContent = `📅 ${dateString} 🕒 ${timeString}`;
+    }
+
+    // ==== Localização + Clima (OpenWeather) ====
+    const OPENWEATHER_API_KEY = '49a86665adb351febecc3ab6861108fb';
+
+    function initGeoWeather() {
+      if (!OPENWEATHER_API_KEY) {
+        // Modo offline - usar dados de exemplo
+        document.getElementById('location').textContent = '📍 Xique Xique, BA';
+        document.getElementById('weather').textContent = '⛅ 28°C, Ensolarado';
+        return;
+      }
+
+      // Primeiro tenta pela geolocalização
+      if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            const { latitude, longitude } = pos.coords;
+            getWeatherByCoords(latitude, longitude);
+          },
+          (err) => {
+            console.warn('Geolocalização negada/erro:', err);
+            // Fallback para Xique Xique
+            getWeatherByCity('Xique Xique,BR');
+          },
+          { enableHighAccuracy: true, timeout: 10000, maximumAge: 600000 }
+        );
+      } else {
+        // Sem geolocalização: fallback
+        getWeatherByCity('Xique Xique,BR');
+      }
+    }
+
+    async function getWeatherByCoords(lat, lon) {
+      try {
+        const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${OPENWEATHER_API_KEY}&units=metric&lang=pt_br`;
+        const res = await fetch(url);
+        
+        if (!res.ok) {
+          throw new Error(`Erro HTTP: ${res.status}`);
+        }
+        
+        const data = await res.json();
+        renderWeather(data);
+      } catch (e) {
+        console.error('Erro ao buscar clima por coordenadas:', e);
+        getWeatherByCity('Xique Xique,BR');
+      }
+    }
+
+    async function getWeatherByCity(q) {
+      try {
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(q)}&appid=${OPENWEATHER_API_KEY}&units=metric&lang=pt_br`;
+        const res = await fetch(url);
+        
+        if (!res.ok) {
+          throw new Error(`Erro HTTP: ${res.status}`);
+        }
+        
+        const data = await res.json();
+        renderWeather(data);
+      } catch (e) {
+        console.error('Erro ao buscar clima por cidade:', e);
+        // Modo offline
+        document.getElementById('location').textContent = '📍 Xique Xique, BA';
+        document.getElementById('weather').textContent = '⛅ 28°C, Ensolarado';
+      }
+    }
+
+    function renderWeather(data) {
+      if (!data || !data.weather || !data.main) {
+        document.getElementById('location').textContent = '📍 Xique Xique, BA';
+        document.getElementById('weather').textContent = '⛅ 28°C, Ensolarado';
+        return;
+      }
+      const city = data.name || 'Sua região';
+      const temp = (data.main.temp != null) ? data.main.temp.toFixed(1) + '°C' : '--';
+      const desc = (data.weather[0] && data.weather[0].description) ? data.weather[0].description : '—';
+      document.getElementById('location').textContent = `📍 ${city}`;
+      document.getElementById('weather').textContent = `🌡️ ${temp} | ${desc}`;
+    }
+    // ==== Fim Localização + Clima ====
+
+    // Função para fazer a página deslizar para baixo
+    function ajudarProjeto() {
+      document.body.classList.add('slide-down');
+      
+      // Abrir o modal após a animação
+      setTimeout(() => {
+        document.body.classList.remove('slide-down');
+        abrirModalPix();
+      }, 500);
+    }
+
+    // Função de acessibilidade melhorada (remove emojis)
+    const sintetizador = window.speechSynthesis;
+    let lendo = false;
+
+    function lerPagina() {
+      const botao = document.getElementById("botaoLeitura");
+
+      if (lendo) {
+        sintetizador.cancel();
+        lendo = false;
+        botao.innerText = "🔊 " + translations[currentLanguage].readButton;
+      } else {
+        // Obter texto da página e remover emojis
+        let texto = document.body.innerText;
+        texto = texto.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F700}-\u{1F77F}\u{1F780}-\u{1F7FF}\u{1F800}-\u{1F8FF}\u{1F900}-\u{1F9FF}\u{1FA00}-\u{1FA6F}\u{1FA70}-\u{1FAFF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, '');
+        
+        const utterance = new SpeechSynthesisUtterance(texto);
+        utterance.lang = currentLanguage === 'pt' ? 'pt-BR' : currentLanguage === 'en' ? 'en-US' : 'es-ES';
+        utterance.rate = 1;
+
+        utterance.onend = () => {
+          lendo = false;
+          botao.innerText = "🔊 " + translations[currentLanguage].readButton;
+        };
+
+        sintetizador.speak(utterance);
+        lendo = true;
+        botao.innerText = "🔇 " + (currentLanguage === 'pt' ? 'PARAR LEITURA' : currentLanguage === 'en' ? 'STOP READING' : 'DETENER LECTURA');
+      }
+    }
+
+    // Função para abrir modal de informações
+    function abrirModalInfo(titulo, conteudo) {
+      document.getElementById('modalInfoTitle').textContent = titulo;
+      document.getElementById('modalInfoContent').innerHTML = conteudo;
+      document.getElementById('modalInfo').style.display = 'block';
+    }
+
+    // Funções existentes da aplicação
+    function calcularIMC() {
+      const peso = parseFloat(document.getElementById('peso').value.replace(',', '.'));
+      const altura = parseFloat(document.getElementById('altura').value.replace(',', '.')) / 100;
+      if (!peso || !altura) {
+        document.getElementById('resultadoIMC').textContent = currentLanguage === 'pt' ? 'Informe peso e altura válidos.' : currentLanguage === 'en' ? 'Enter valid weight and height.' : 'Ingrese peso y altura válidos.';
+        return;
+      }
+      const imc = peso / (altura * altura);
+      let classificacao = '';
+
+      if (imc < 18.5) classificacao = translations[currentLanguage].classification1;
+      else if (imc < 25) classificacao = translations[currentLanguage].classification2;
+      else if (imc < 30) classificacao = translations[currentLanguage].classification3;
+      else if (imc < 35) classificacao = translations[currentLanguage].classification4;
+      else if (imc < 40) classificacao = translations[currentLanguage].classification5;
+      else classificacao = translations[currentLanguage].classification6;
+
+      document.getElementById('resultadoIMC').textContent = `IMC: ${imc.toFixed(2)} - ${classificacao}`;
+    }
+
+    function verificarSigno() {
+      const valor = document.getElementById('dataNascimento').value;
+      if (!valor) {
+        document.getElementById('resultadoSigno').textContent = currentLanguage === 'pt' ? 'Selecione sua data de nascimento.' : currentLanguage === 'en' ? 'Select your date of birth.' : 'Seleccione su fecha de nacimiento.';
+        return;
+      }
+      const data = new Date(valor);
+      const dia = data.getDate() + 1;
+      const mes = data.getMonth() + 1;
+
+      let signo = '';
+      if ((mes == 3 && dia >= 21) || (mes == 4 && dia <= 19)) signo = currentLanguage === 'pt' ? 'Áries' : currentLanguage === 'en' ? 'Aries' : 'Aries';
+      else if ((mes == 4 && dia >= 20) || (mes == 5 && dia <= 20)) signo = currentLanguage === 'pt' ? 'Touro' : currentLanguage === 'en' ? 'Taurus' : 'Tauro';
+      else if ((mes == 5 && dia >= 21) || (mes == 6 && dia <= 20)) signo = currentLanguage === 'pt' ? 'Gêmeos' : currentLanguage === 'en' ? 'Gemini' : 'Géminis';
+      else if ((mes == 6 && dia >= 21) || (mes == 7 && dia <= 22)) signo = currentLanguage === 'pt' ? 'Câncer' : currentLanguage === 'en' ? 'Cancer' : 'Cáncer';
+      else if ((mes == 7 && dia >= 23) || (mes == 8 && dia <= 22)) signo = currentLanguage === 'pt' ? 'Leão' : currentLanguage === 'en' ? 'Leo' : 'Leo';
+      else if ((mes == 8 && dia >= 23) || (mes == 9 && dia <= 22)) signo = currentLanguage === 'pt' ? 'Virgem' : currentLanguage === 'en' ? 'Virgo' : 'Virgo';
+      else if ((mes == 9 && dia >= 23) || (mes == 10 && dia <= 22)) signo = currentLanguage ==='pt' ? 'Libra' : currentLanguage === 'en' ? 'Libra' : 'Libra';
+      else if ((mes == 10 && dia >= 23) || (mes == 11 && dia <= 21)) signo = currentLanguage === 'pt' ? 'Escorpião' : currentLanguage === 'en' ? 'Scorpio' : 'Escorpio';
+      else if ((mes == 11 && dia >= 22) || (mes == 12 && dia <= 21)) signo = currentLanguage === 'pt' ? 'Sagitário' : currentLanguage === 'en' ? 'Sagittarius' : 'Sagitario';
+      else if ((mes == 12 && dia >= 22) || (mes == 1 && dia <= 19)) signo = currentLanguage === 'pt' ? 'Capricórnio' : currentLanguage === 'en' ? 'Capricorn' : 'Capricornio';
+      else if ((mes == 1 && dia >= 20) || (mes == 2 && dia <= 18)) signo = currentLanguage === 'pt' ? 'Aquário' : currentLanguage === 'en' ? 'Aquarius' : 'Acuario';
+      else if ((mes == 2 && dia >= 19) || (mes == 3 && dia <= 20)) signo = currentLanguage === 'pt' ? 'Peixes' : currentLanguage === 'en' ? 'Pisces' : 'Piscis';
+
+      document.getElementById('resultadoSigno').textContent = (currentLanguage === 'pt' ? 'Seu signo é: ' : currentLanguage === 'en' ? 'Your sign is: ' : 'Tu signo es: ') + signo;
+    }
+
+    function abrirModalBiografia() {
+      document.getElementById('modalBiografia').style.display = "block";
+    }
+
+    function abrirModalPix() {
+      document.getElementById('modalPix').style.display = "block";
+    }
+
+    function fecharModal(id) {
+      document.getElementById(id).style.display = "none";
+    }
+
+    // Fechar modal ao clicar fora do conteúdo
+    window.onclick = function(event) {
+      const modais = document.getElementsByClassName('modal');
+      for (let i = 0; i < modais.length; i++) {
+        if (event.target === modais[i]) {
+          modais[i].style.display = "none";
+        }
+      }
+    }
+  </script>
+</body>
+</html>
