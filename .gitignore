@@ -1,0 +1,16 @@
+# Operating System Artifacts
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*~
+
+# Temporary & Local files
+*.tmp
+*.bak
+*.old
+*.local
+.env
+.env.*
+!.env.example
