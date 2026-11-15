@@ -86,13 +86,13 @@ O **Orbis Tech Kids FM** é um projeto independente mantido com dedicação comu
 
 - **Chave PIX (Código Aleatório):** `dc0520f0-a2a6-4945-95fd-fc317b22671d`
 - **Titular:** Rivonildo Azevedo (Nubank - 260 | Agência: 0001 | Conta: 40280541-5)
-- **WhatsApp Oficial:** [+55 (74) 99914-0925](https://wa.me/5574999140925)
+- **WhatsApp Oficial:** [+55 (74) 981334625](https://wa.me/5574981334625)
 
 ---
 
 ## 👨‍💻 Idealizador
 
-**Rivonildo Azevedo ("Donda")**  
+**Rivonildo Azevedo**  
 Estudante de Engenharia de Software, entusiasta de tecnologia, inteligência artificial e impacto social, natural de Xique-Xique, Bahia.
 
 > *"Construindo pontes de oportunidade para transformar o presente e inspirar o futuro da nossa gente!"*
